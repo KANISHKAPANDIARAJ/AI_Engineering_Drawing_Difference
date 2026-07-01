@@ -1,0 +1,57 @@
+======================================
+ENGINEERING DRAWING DIFFERENCE REPORT
+======================================
+
+Generated At: 2026-07-01T15:43:29.236082
+
+INPUT FILES
+File 1: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c2614ce4eedc498cbe1c40c7d1223e19.pdf
+File 2: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\bb102886243144238f16b3d4572c1580.pdf
+
+SUMMARY STATISTICS
+SSIM Score: 0.9115
+Total Pixels: 2073600
+Changed Pixels: 261917
+Percentage Change: 12.63%
+Total Regions: 30
+Largest Region Area: 1349760
+Smallest Region Area: 35
+Average Region Area: 93769.66666666667
+Severity: CRITICAL
+
+FINAL CONCLUSION
+30 revision region(s) detected. Approximately 12.63% of the drawing differs from the reference. SSIM similarity score is 0.9115. Critical modifications detected. Major design revisions present and require immediate review.
+
+CHANGED REGIONS (Bounding Boxes)
+Region 1: x=186, y=687, w=245, h=40
+Region 2: x=1511, y=631, w=24, h=7
+Region 3: x=1486, y=631, w=16, h=5
+Region 4: x=52, y=592, w=108, h=22
+Region 5: x=35, y=576, w=1493, h=156
+Region 6: x=204, y=489, w=23, h=18
+Region 7: x=1347, y=482, w=11, h=6
+Region 8: x=1324, y=481, w=19, h=26
+Region 9: x=1290, y=481, w=7, h=5
+Region 10: x=1218, y=481, w=7, h=5
+Region 11: x=1080, y=481, w=9, h=5
+Region 12: x=1049, y=481, w=8, h=5
+Region 13: x=857, y=481, w=9, h=5
+Region 14: x=1408, y=450, w=10, h=7
+Region 15: x=1383, y=430, w=157, h=29
+Region 16: x=221, y=414, w=11, h=9
+Region 17: x=94, y=406, w=19, h=10
+Region 18: x=1436, y=391, w=12, h=11
+Region 19: x=0, y=377, w=1920, h=703
+Region 20: x=184, y=371, w=24, h=19
+Region 21: x=473, y=370, w=28, h=21
+Region 22: x=1056, y=369, w=32, h=22
+Region 23: x=764, y=369, w=30, h=22
+Region 24: x=342, y=354, w=17, h=7
+Region 25: x=631, y=353, w=20, h=7
+Region 26: x=921, y=347, w=22, h=13
+Region 27: x=1201, y=346, w=38, h=14
+Region 28: x=1294, y=343, w=95, h=93
+Region 29: x=55, y=322, w=46, h=30
+Region 30: x=0, y=0, w=1920, h=624
+
+======================================

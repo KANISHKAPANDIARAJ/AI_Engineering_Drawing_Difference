@@ -1,0 +1,154 @@
+/* =========================
+   Engineering Dashboard UI
+   AI Drawing Comparison System
+   Theme: Blue + White + Gray
+========================= */
+
+/* -------------------------
+   GLOBAL STYLES
+-------------------------- */
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+}
+
+/* -------------------------
+   NAVBAR
+-------------------------- */
+.navbar {
+    background-color: #0d6efd !important;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #dbe9ff !important;
+}
+
+/* -------------------------
+   PAGE TITLE AREA
+-------------------------- */
+h2, h3, h4 {
+    color: #1f2d3d;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* -------------------------
+   CARDS
+-------------------------- */
+.card {
+    border: none;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* -------------------------
+   BUTTONS
+-------------------------- */
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+.btn-outline-dark {
+    border-radius: 8px;
+}
+
+.btn-outline-primary {
+    border-radius: 8px;
+}
+
+/* -------------------------
+   FORM ELEMENTS
+-------------------------- */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #d0d7de;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* -------------------------
+   ALERTS
+-------------------------- */
+.alert {
+    border-radius: 8px;
+}
+
+/* -------------------------
+   IMAGES
+-------------------------- */
+img {
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+/* -------------------------
+   LOADING SPINNER
+-------------------------- */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* -------------------------
+   RESULTS GRID
+-------------------------- */
+#visuals img {
+    border: 1px solid #e5e7eb;
+    padding: 4px;
+    background: #fff;
+}
+
+/* -------------------------
+   FOOTER
+-------------------------- */
+.footer {
+    background-color: #0b1f3a;
+    color: #ffffff;
+    padding: 20px 0;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* -------------------------
+   RESPONSIVE DESIGN
+-------------------------- */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}

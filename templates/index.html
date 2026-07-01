@@ -1,0 +1,250 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+
+        <!-- ================= TITLE ================= -->
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Engineering Drawing Comparison System</h2>
+            <p class="text-muted">
+                Upload two drawings (PDF / Image) for AI-based difference detection.
+            </p>
+        </div>
+
+        <!-- ================= ALERTS ================= -->
+        <div id="alertBox"></div>
+
+        <!-- ================= UPLOAD ================= -->
+        <div class="card p-4">
+
+            <form id="uploadForm" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Upload Drawing A</label>
+                    <input type="file" class="form-control" name="file1" id="file1"
+                        accept=".png,.jpg,.jpeg,.pdf" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Upload Drawing B</label>
+                    <input type="file" class="form-control" name="file2" id="file2"
+                        accept=".png,.jpg,.jpeg,.pdf" required>
+                </div>
+
+                <div id="validationMsg" class="text-danger small mb-2"></div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg" id="compareBtn">
+                        Compare Drawings
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- ================= LOADING ================= -->
+        <div id="loading" class="text-center mt-4 d-none">
+            <div class="spinner-border text-primary"></div>
+            <p class="mt-2" id="loadingText">Processing drawings...</p>
+        </div>
+
+        <!-- ================= RESULTS ================= -->
+        <div id="resultsSection" class="mt-5 d-none">
+
+            <!-- SUMMARY -->
+            <div class="card p-4 mb-4">
+                <h4>Comparison Summary</h4>
+                <div id="summaryContent"></div>
+            </div>
+
+            <!-- STATISTICS -->
+            <div class="card p-4 mb-4">
+                <h4>Statistics</h4>
+                <div id="statsContent"></div>
+            </div>
+
+            <!-- VISUALIZATIONS -->
+            <div class="card p-4 mb-4">
+                <h4>Visualizations</h4>
+                <div id="visuals" class="row g-3"></div>
+            </div>
+
+            <!-- REPORTS -->
+            <div class="card p-4">
+                <h4>Reports</h4>
+
+                <a id="txtReport" class="btn btn-outline-dark me-2" download>
+                    Download TXT
+                </a>
+
+                <a id="jsonReport" class="btn btn-outline-primary" download>
+                    Download JSON
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+const form = document.getElementById("uploadForm");
+const file1 = document.getElementById("file1");
+const file2 = document.getElementById("file2");
+
+const compareBtn = document.getElementById("compareBtn");
+const loading = document.getElementById("loading");
+const loadingText = document.getElementById("loadingText");
+
+const resultsSection = document.getElementById("resultsSection");
+
+const summaryContent = document.getElementById("summaryContent");
+const statsContent = document.getElementById("statsContent");
+const visuals = document.getElementById("visuals");
+
+const txtReport = document.getElementById("txtReport");
+const jsonReport = document.getElementById("jsonReport");
+
+const alertBox = document.getElementById("alertBox");
+
+// Single source of truth for the output URL prefix. The Flask route
+// "/outputs/<path:filename>" is the only thing this prefix has to match.
+// Every path coming back from /process is relative to OUTPUTS_DIR
+// (e.g. "highlighted/boxes.png", "reports/report.json") -- so basePath
+// is applied exactly once, here, for both images and reports.
+const basePath = "/outputs/";
+
+function showAlert(message, type) {
+    alertBox.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+}
+
+function validateFile(file) {
+    const allowed = ["pdf", "png", "jpg", "jpeg"];
+    const ext = file.name.split(".").pop().toLowerCase();
+    return allowed.includes(ext);
+}
+
+function resetUI() {
+    summaryContent.innerHTML = "";
+    statsContent.innerHTML = "";
+    visuals.innerHTML = "";
+}
+
+function safe(val) {
+    return val ?? "N/A";
+}
+
+form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    alertBox.innerHTML = "";
+    document.getElementById("validationMsg").innerText = "";
+
+    resetUI();
+
+    if (!file1.files[0] || !file2.files[0]) {
+        showAlert("Please upload both drawings.", "danger");
+        return;
+    }
+
+    if (!validateFile(file1.files[0]) || !validateFile(file2.files[0])) {
+        showAlert("Only PDF, PNG, JPG, JPEG allowed.", "danger");
+        return;
+    }
+
+    compareBtn.disabled = true;
+    compareBtn.innerText = "Processing...";
+    loading.classList.remove("d-none");
+    resultsSection.classList.add("d-none");
+
+    const formData = new FormData();
+    formData.append("file1", file1.files[0]);
+    formData.append("file2", file2.files[0]);
+
+    try {
+        const response = await fetch("/process", {
+            method: "POST",
+            body: formData
+        });
+
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.error || "Request failed");
+        }
+
+        const data = await response.json();
+
+        loading.classList.add("d-none");
+        compareBtn.disabled = false;
+        compareBtn.innerText = "Compare Drawings";
+
+        showAlert("Processing completed successfully!", "success");
+
+        resultsSection.classList.remove("d-none");
+
+        // ---------------- SUMMARY ----------------
+        const s = data.summary;
+
+        summaryContent.innerHTML = `
+            <p><strong>SSIM Score:</strong> ${safe(s.ssim_score)}</p>
+            <p><strong>Severity:</strong> ${safe(s.severity)}</p>
+            <p><strong>Changed Regions:</strong> ${safe(s.total_regions)}</p>
+            <p><strong>Percentage Change:</strong> ${safe(s.percentage_change)}%</p>
+            <p><strong>Conclusion:</strong> ${safe(s.conclusion)}</p>
+        `;
+
+        // ---------------- STATISTICS ----------------
+        const st = data.statistics;
+
+        statsContent.innerHTML = `
+            <p><strong>Changed Pixels:</strong> ${safe(st.changed_pixels)}</p>
+            <p><strong>Total Pixels:</strong> ${safe(st.total_pixels)}</p>
+            <p><strong>Difference Pixel Count:</strong> ${safe(st.diff_pixel_count)}</p>
+            <p><strong>Average Region Area:</strong> ${safe(st.average_region_area)}</p>
+        `;
+
+        // ---------------- VISUALS ----------------
+        // data.visualizations items look like "highlighted/boxes.png"
+        data.visualizations.forEach((file, index) => {
+
+            const labels = ["Boxes", "Heatmap", "Overlay", "Side-by-side"];
+            const label = labels[index] || "Result";
+
+            visuals.innerHTML += `
+                <div class="col-md-6 text-center">
+                    <p class="fw-semibold">${label}</p>
+                    <img src="${basePath + file}" class="img-fluid rounded shadow-sm">
+                </div>
+            `;
+        });
+
+        // ---------------- REPORTS ----------------
+        // data.reports.txt_report / json_report look like "reports/report.txt".
+        // Reuse the same basePath instead of hardcoding "/outputs/reports/" --
+        // that duplicate hardcoded prefix was the root cause of the
+        // "/outputs/reports/outputs/reports/..." 404s.
+        txtReport.href = basePath + data.reports.txt_report;
+        jsonReport.href = basePath + data.reports.json_report;
+
+    } catch (err) {
+
+        loading.classList.add("d-none");
+        compareBtn.disabled = false;
+        compareBtn.innerText = "Compare Drawings";
+
+        showAlert(err.message, "danger");
+    }
+});
+
+</script>
+
+{% endblock %}

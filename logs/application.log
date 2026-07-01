@@ -1,0 +1,486 @@
+2026-07-01 16:13:06 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:13:08 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:14:06 | INFO     | __main__ | app.py:60 | Pipeline request received
+2026-07-01 16:14:06 | INFO     | __main__ | app.py:80 | Files saved: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c200d7bd0c8f4de88c5770cd68caae48.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\89ab554903d94f6cac739670b6e8bab4.pdf
+2026-07-01 16:14:06 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c200d7bd0c8f4de88c5770cd68caae48.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\89ab554903d94f6cac739670b6e8bab4.pdf
+2026-07-01 16:14:06 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c200d7bd0c8f4de88c5770cd68caae48.pdf
+2026-07-01 16:14:06 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\89ab554903d94f6cac739670b6e8bab4.pdf
+2026-07-01 16:14:07 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 16:14:07 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 16:14:07 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 16:14:07 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 16:14:08 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 16:14:08 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 16:14:08 | INFO     | modules.compare | compare.py:143 | Starting image comparison pipeline
+2026-07-01 16:14:08 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 16:14:08 | ERROR    | modules.compare | compare.py:33 | SSIM computation failed: Since image dtype is floating point, you must specify the data_range parameter. Please read the documentation carefully (including the note). It is recommended that you always specify the data_range anyway.
+2026-07-01 16:14:08 | ERROR    | modules.compare | compare.py:168 | Comparison pipeline failed: Since image dtype is floating point, you must specify the data_range parameter. Please read the documentation carefully (including the note). It is recommended that you always specify the data_range anyway.
+2026-07-01 16:14:08 | ERROR    | __main__ | app.py:137 | Pipeline failed: Since image dtype is floating point, you must specify the data_range parameter. Please read the documentation carefully (including the note). It is recommended that you always specify the data_range anyway.
+2026-07-01 16:17:11 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:17:12 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:17:37 | INFO     | __main__ | app.py:60 | Pipeline request received
+2026-07-01 16:17:37 | INFO     | __main__ | app.py:80 | Files saved: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\6732614edcff4aa1be0a012b8feed072.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7fbf66f933384f9da3e0ece73544e61b.pdf
+2026-07-01 16:17:37 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\6732614edcff4aa1be0a012b8feed072.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7fbf66f933384f9da3e0ece73544e61b.pdf
+2026-07-01 16:17:37 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\6732614edcff4aa1be0a012b8feed072.pdf
+2026-07-01 16:17:37 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7fbf66f933384f9da3e0ece73544e61b.pdf
+2026-07-01 16:17:37 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 16:17:37 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 16:17:37 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 16:17:37 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 16:17:38 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 16:17:38 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 16:17:38 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 16:17:38 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 16:17:38 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 16:17:38 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 16:17:38 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 16:17:38 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 16:17:38 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 16:17:38 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 16:17:38 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 16:17:38 | INFO     | modules.visualization | visualization.py:172 | Generating visualizations
+2026-07-01 16:17:38 | INFO     | modules.visualization | visualization.py:36 | Drawing bounding boxes
+2026-07-01 16:17:39 | INFO     | modules.visualization | visualization.py:152 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 16:17:39 | INFO     | modules.visualization | visualization.py:63 | Creating heatmap
+2026-07-01 16:17:39 | INFO     | modules.visualization | visualization.py:152 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 16:17:39 | INFO     | modules.visualization | visualization.py:82 | Creating overlay
+2026-07-01 16:17:39 | INFO     | modules.visualization | visualization.py:63 | Creating heatmap
+2026-07-01 16:17:39 | ERROR    | modules.visualization | visualization.py:99 | Overlay failed: OpenCV(4.10.0) D:\a\opencv-python\opencv-python\opencv\modules\core\src\arithm.cpp:685: error: (-5:Bad argument) When the input arrays in add/subtract/multiply/divide functions have different types, the output array type must be explicitly specified in function 'cv::arithm_op'
+
+2026-07-01 16:17:39 | ERROR    | modules.visualization | visualization.py:197 | Visualization pipeline failed: OpenCV(4.10.0) D:\a\opencv-python\opencv-python\opencv\modules\core\src\arithm.cpp:685: error: (-5:Bad argument) When the input arrays in add/subtract/multiply/divide functions have different types, the output array type must be explicitly specified in function 'cv::arithm_op'
+
+2026-07-01 16:17:39 | ERROR    | __main__ | app.py:137 | Pipeline failed: OpenCV(4.10.0) D:\a\opencv-python\opencv-python\opencv\modules\core\src\arithm.cpp:685: error: (-5:Bad argument) When the input arrays in add/subtract/multiply/divide functions have different types, the output array type must be explicitly specified in function 'cv::arithm_op'
+
+2026-07-01 16:19:34 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:19:35 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:19:55 | INFO     | __main__ | app.py:60 | Pipeline request received
+2026-07-01 16:19:55 | INFO     | __main__ | app.py:80 | Files saved: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\79a1e5de1d0547a7afbcb62c7e690e26.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7ca9af89eac94ed3b812615709775e42.pdf
+2026-07-01 16:19:55 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\79a1e5de1d0547a7afbcb62c7e690e26.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7ca9af89eac94ed3b812615709775e42.pdf
+2026-07-01 16:19:55 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\79a1e5de1d0547a7afbcb62c7e690e26.pdf
+2026-07-01 16:19:55 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7ca9af89eac94ed3b812615709775e42.pdf
+2026-07-01 16:19:55 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 16:19:55 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 16:19:55 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 16:19:55 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 16:19:56 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 16:19:56 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 16:19:56 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 16:19:56 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 16:19:56 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 16:19:56 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 16:19:56 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 16:19:56 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 16:19:56 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 16:19:56 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 16:19:56 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 16:19:56 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 16:19:56 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 16:19:56 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 16:19:56 | INFO     | __main__ | app.py:127 | Pipeline completed successfully
+2026-07-01 16:22:50 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:22:51 | INFO     | __main__ | app.py:154 | Starting Flask application
+2026-07-01 16:23:14 | INFO     | __main__ | app.py:60 | Pipeline request received
+2026-07-01 16:23:14 | INFO     | __main__ | app.py:80 | Files saved: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\b96be7cdb5a245a6b559be7fc31ba402.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\411a9fa55e484abc899aa8292e8396ad.pdf
+2026-07-01 16:23:14 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\b96be7cdb5a245a6b559be7fc31ba402.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\411a9fa55e484abc899aa8292e8396ad.pdf
+2026-07-01 16:23:14 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\b96be7cdb5a245a6b559be7fc31ba402.pdf
+2026-07-01 16:23:14 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\411a9fa55e484abc899aa8292e8396ad.pdf
+2026-07-01 16:23:14 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 16:23:14 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 16:23:15 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 16:23:15 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 16:23:15 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 16:23:15 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 16:23:15 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 16:23:15 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 16:23:15 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 16:23:15 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 16:23:15 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 16:23:15 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 16:23:15 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 16:23:15 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 16:23:15 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 16:23:15 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 16:23:15 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 16:23:15 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 16:23:15 | INFO     | __main__ | app.py:127 | Pipeline completed successfully
+2026-07-01 16:32:52 | INFO     | __main__ | app.py:152 | Starting Flask app
+2026-07-01 16:32:52 | INFO     | __main__ | app.py:152 | Starting Flask app
+2026-07-01 16:33:16 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 16:33:16 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\60b03cd092354f31b56aaef16df7ff07.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\febb16cf5fb34b64a4019313ff13c2f3.pdf
+2026-07-01 16:33:16 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\60b03cd092354f31b56aaef16df7ff07.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\febb16cf5fb34b64a4019313ff13c2f3.pdf
+2026-07-01 16:33:16 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\60b03cd092354f31b56aaef16df7ff07.pdf
+2026-07-01 16:33:16 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\febb16cf5fb34b64a4019313ff13c2f3.pdf
+2026-07-01 16:33:16 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 16:33:16 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 16:33:16 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 16:33:16 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 16:33:17 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 16:33:18 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 16:33:18 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 16:33:18 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 16:33:18 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 16:33:18 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 16:33:18 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 16:33:18 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 16:33:18 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 16:33:18 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 16:33:18 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 16:33:18 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 16:33:18 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 16:33:18 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 16:33:18 | INFO     | __main__ | app.py:128 | Pipeline completed successfully
+2026-07-01 16:37:24 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 16:41:09 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 16:41:09 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 16:41:31 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 16:41:31 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\34671067b56448e49bf76acf5602019d.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\2005679948ae49a3b6e0bfc58e8a33ff.pdf
+2026-07-01 16:41:31 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\34671067b56448e49bf76acf5602019d.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\2005679948ae49a3b6e0bfc58e8a33ff.pdf
+2026-07-01 16:41:31 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\34671067b56448e49bf76acf5602019d.pdf
+2026-07-01 16:41:31 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\2005679948ae49a3b6e0bfc58e8a33ff.pdf
+2026-07-01 16:41:31 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 16:41:31 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 16:41:31 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 16:41:31 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 16:41:32 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 16:41:33 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 16:41:33 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 16:41:33 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 16:41:33 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 16:41:33 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 16:41:33 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 16:41:33 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 16:41:33 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 16:41:33 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 16:41:33 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 16:41:33 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 16:41:34 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 16:41:34 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 16:41:34 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 16:41:34 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 16:41:34 | INFO     | __main__ | app.py:131 | Pipeline completed successfully
+2026-07-01 16:42:50 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 16:43:07 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 16:43:08 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 16:43:26 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 16:43:26 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\0555131759b6452aadaadfb0acbbc1c7.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7c1a621199bb40af8c5cfe5fe4fc2a3c.pdf
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\0555131759b6452aadaadfb0acbbc1c7.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7c1a621199bb40af8c5cfe5fe4fc2a3c.pdf
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\0555131759b6452aadaadfb0acbbc1c7.pdf
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7c1a621199bb40af8c5cfe5fe4fc2a3c.pdf
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 16:43:26 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 16:43:27 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 16:43:27 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 16:43:27 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 16:43:27 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 16:43:27 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 16:43:27 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 16:43:27 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 16:43:27 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 16:43:27 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 16:43:27 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 16:43:27 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 16:43:28 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 16:43:28 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 16:43:28 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 16:43:28 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 16:43:28 | INFO     | __main__ | app.py:131 | Pipeline completed successfully
+2026-07-01 20:42:09 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:42:11 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:42:54 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 20:42:55 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\a144c598c9da46dd984bb56aaeef1012.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7b639e53ea6c49798e3be6304a599adf.pdf
+2026-07-01 20:42:55 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\a144c598c9da46dd984bb56aaeef1012.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7b639e53ea6c49798e3be6304a599adf.pdf
+2026-07-01 20:42:55 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\a144c598c9da46dd984bb56aaeef1012.pdf
+2026-07-01 20:42:55 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\7b639e53ea6c49798e3be6304a599adf.pdf
+2026-07-01 20:42:55 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 20:42:55 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 20:42:56 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 20:42:56 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 20:42:57 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 20:42:57 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 20:42:57 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 20:42:57 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 20:42:58 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 20:42:58 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 20:42:58 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 20:42:58 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 20:42:58 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 20:42:58 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 20:42:58 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 20:42:58 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 20:42:59 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 20:42:59 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 20:42:59 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 20:42:59 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 20:42:59 | INFO     | __main__ | app.py:131 | Pipeline completed successfully
+2026-07-01 20:48:53 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:48:55 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:49:17 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 20:49:17 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\5ec154800f524f0aab15d28be43b79ce.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c6060c464b224b648deaa4dbd16f2806.pdf
+2026-07-01 20:49:17 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\5ec154800f524f0aab15d28be43b79ce.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c6060c464b224b648deaa4dbd16f2806.pdf
+2026-07-01 20:49:17 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\5ec154800f524f0aab15d28be43b79ce.pdf
+2026-07-01 20:49:17 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c6060c464b224b648deaa4dbd16f2806.pdf
+2026-07-01 20:49:18 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 20:49:18 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 20:49:18 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 20:49:18 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 20:49:18 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 20:49:18 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 20:49:18 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 20:49:18 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 20:49:19 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 20:49:19 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 20:49:19 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 20:49:19 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 20:49:19 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 20:49:19 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 20:49:19 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 20:49:19 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 20:49:19 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 20:49:19 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 20:49:19 | INFO     | __main__ | app.py:131 | Pipeline completed successfully
+2026-07-01 20:49:55 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:49:57 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:50:20 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 20:50:20 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\e2a92d301aac4f6f84b67feb44d524f3.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\61be5572a3c344a88ec8f16ca1f2976d.pdf
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\e2a92d301aac4f6f84b67feb44d524f3.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\61be5572a3c344a88ec8f16ca1f2976d.pdf
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\e2a92d301aac4f6f84b67feb44d524f3.pdf
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\61be5572a3c344a88ec8f16ca1f2976d.pdf
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 20:50:20 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 20:50:20 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 20:50:20 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 20:50:21 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 20:50:21 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 20:50:21 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 20:50:21 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 20:50:21 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 20:50:21 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 20:50:21 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 20:50:21 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 20:50:22 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 20:50:22 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 20:50:22 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 20:50:22 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 20:50:22 | INFO     | __main__ | app.py:131 | Pipeline completed successfully
+2026-07-01 20:50:40 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:50:57 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 20:50:57 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\cbfb97e5753e411da2f35647117478fb.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\2477ad2bc76740158e5047b72187f1be.pdf
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\cbfb97e5753e411da2f35647117478fb.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\2477ad2bc76740158e5047b72187f1be.pdf
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\cbfb97e5753e411da2f35647117478fb.pdf
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\2477ad2bc76740158e5047b72187f1be.pdf
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 20:50:57 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 20:50:57 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 20:50:57 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 20:50:58 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 20:50:58 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 20:50:58 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 20:50:58 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 20:50:58 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 20:50:58 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 20:50:58 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 20:50:58 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 20:50:59 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 20:50:59 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 20:50:59 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 20:50:59 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 20:50:59 | INFO     | __main__ | app.py:131 | Pipeline completed successfully
+2026-07-01 20:51:30 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:51:33 | INFO     | __main__ | app.py:155 | Starting Flask app
+2026-07-01 20:51:42 | INFO     | __main__ | app.py:68 | Pipeline started
+2026-07-01 20:51:43 | INFO     | __main__ | app.py:84 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\458039a49f21403483c1730bbb911a28.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\be769c4f21ff4577b40d1758c5385c53.pdf
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\458039a49f21403483c1730bbb911a28.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\be769c4f21ff4577b40d1758c5385c53.pdf
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\458039a49f21403483c1730bbb911a28.pdf
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\be769c4f21ff4577b40d1758c5385c53.pdf
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 20:51:43 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 20:51:43 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 20:51:43 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 20:51:44 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 20:51:44 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 20:51:44 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 20:51:44 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 20:51:44 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 20:51:44 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 20:51:44 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 20:51:44 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 20:51:44 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 20:51:44 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 20:51:44 | INFO     | __main__ | app.py:131 | Pipeline completed successfully
+2026-07-01 21:05:03 | INFO     | __main__ | app.py:162 | Starting Flask app
+2026-07-01 21:06:11 | INFO     | __main__ | app.py:162 | Starting Flask app
+2026-07-01 21:06:13 | INFO     | __main__ | app.py:162 | Starting Flask app
+2026-07-01 21:06:35 | INFO     | __main__ | app.py:72 | Pipeline started
+2026-07-01 21:06:35 | INFO     | __main__ | app.py:88 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\153f24e9a1b64ab6af22bb482e21e7d3.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\1c20505db1874906a097612b7ef761e4.pdf
+2026-07-01 21:06:35 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\153f24e9a1b64ab6af22bb482e21e7d3.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\1c20505db1874906a097612b7ef761e4.pdf
+2026-07-01 21:06:35 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\153f24e9a1b64ab6af22bb482e21e7d3.pdf
+2026-07-01 21:06:35 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\1c20505db1874906a097612b7ef761e4.pdf
+2026-07-01 21:06:36 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 21:06:36 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 21:06:36 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 21:06:36 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 21:06:36 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 21:06:36 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 21:06:36 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 21:06:36 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 21:06:37 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 21:06:37 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 21:06:37 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 21:06:37 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 21:06:37 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 21:06:37 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 21:06:37 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 21:06:37 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 21:06:37 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 21:06:37 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 21:06:37 | INFO     | __main__ | app.py:138 | Pipeline completed successfully
+2026-07-01 21:13:07 | INFO     | __main__ | app.py:168 | Starting Flask app
+2026-07-01 21:13:27 | INFO     | __main__ | app.py:78 | Pipeline started
+2026-07-01 21:13:27 | INFO     | __main__ | app.py:94 | Saved files: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c2614ce4eedc498cbe1c40c7d1223e19.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\bb102886243144238f16b3d4572c1580.pdf
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:221 | Pipeline started: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c2614ce4eedc498cbe1c40c7d1223e19.pdf, C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\bb102886243144238f16b3d4572c1580.pdf
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c2614ce4eedc498cbe1c40c7d1223e19.pdf
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:25 | Loading file: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\bb102886243144238f16b3d4572c1580.pdf
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:56 | Resizing images
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:90 | Applying Gaussian noise reduction
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:113 | Enhancing contrast
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:144 | Starting ORB feature alignment
+2026-07-01 21:13:27 | INFO     | modules.preprocess | preprocess.py:200 | Normalizing images
+2026-07-01 21:13:28 | INFO     | modules.preprocess | preprocess.py:233 | Pipeline completed successfully
+2026-07-01 21:13:28 | INFO     | modules.compare | compare.py:157 | Starting image comparison pipeline
+2026-07-01 21:13:28 | INFO     | modules.compare | compare.py:18 | Computing SSIM
+2026-07-01 21:13:28 | INFO     | modules.compare | compare.py:56 | Applying thresholding
+2026-07-01 21:13:28 | INFO     | modules.compare | compare.py:76 | Applying morphological operations
+2026-07-01 21:13:28 | INFO     | modules.compare | compare.py:94 | Extracting contours
+2026-07-01 21:13:28 | INFO     | modules.compare | compare.py:128 | Computing statistics
+2026-07-01 21:13:28 | INFO     | modules.compare | compare.py:175 | Comparison done | SSIM=0.9115 | Regions=30
+2026-07-01 21:13:28 | INFO     | modules.summary | summary.py:23 | Generating engineering drawing summary
+2026-07-01 21:13:28 | INFO     | modules.summary | summary.py:72 | Summary generation completed successfully
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:184 | Generating visualizations
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:35 | Drawing bounding boxes
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\boxes.png
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\heatmap.png
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:90 | Creating overlay
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:62 | Creating heatmap
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\overlay.png
+2026-07-01 21:13:28 | INFO     | modules.visualization | visualization.py:124 | Creating side-by-side comparison
+2026-07-01 21:13:29 | INFO     | modules.visualization | visualization.py:164 | Saved image: C:\Users\kanis\AI_Engineering_Drawing_Difference\outputs\highlighted\side_by_side.png
+2026-07-01 21:13:29 | INFO     | modules.visualization | visualization.py:204 | Visualization pipeline completed successfully
+2026-07-01 21:13:29 | INFO     | modules.report_generator | report_generator.py:27 | Generating reports (TXT + JSON)
+2026-07-01 21:13:29 | INFO     | modules.report_generator | report_generator.py:42 | Report generation completed
+2026-07-01 21:13:29 | INFO     | __main__ | app.py:144 | Pipeline completed successfully
