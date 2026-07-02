@@ -2,56 +2,206 @@
 ENGINEERING DRAWING DIFFERENCE REPORT
 ======================================
 
-Generated At: 2026-07-01T15:43:29.236082
+Generated At: 2026-07-02T05:38:31.721234
 
 INPUT FILES
-File 1: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c2614ce4eedc498cbe1c40c7d1223e19.pdf
-File 2: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\bb102886243144238f16b3d4572c1580.pdf
+File 1: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\44d12dadea3146b4847fcc17ba5b7de4.pdf
+File 2: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\55ce943451cb473c9188869007915b6d.pdf
 
 SUMMARY STATISTICS
-SSIM Score: 0.9115
+SSIM Score: 0.9471
 Total Pixels: 2073600
-Changed Pixels: 261917
-Percentage Change: 12.63%
-Total Regions: 30
-Largest Region Area: 1349760
-Smallest Region Area: 35
-Average Region Area: 93769.66666666667
+Changed Pixels: 108100
+Percentage Change: 5.21%
+Total Regions: 180
+Largest Region Area: 48636
+Smallest Region Area: 25
+Average Region Area: 1303.05
 Severity: CRITICAL
 
 FINAL CONCLUSION
-30 revision region(s) detected. Approximately 12.63% of the drawing differs from the reference. SSIM similarity score is 0.9115. Critical modifications detected. Major design revisions present and require immediate review.
+180 revision region(s) detected. Approximately 5.21% of the drawing differs from the reference. SSIM similarity score is 0.9471. Critical modifications detected. Major design revisions present and require immediate review.
 
 CHANGED REGIONS (Bounding Boxes)
-Region 1: x=186, y=687, w=245, h=40
-Region 2: x=1511, y=631, w=24, h=7
-Region 3: x=1486, y=631, w=16, h=5
-Region 4: x=52, y=592, w=108, h=22
-Region 5: x=35, y=576, w=1493, h=156
-Region 6: x=204, y=489, w=23, h=18
-Region 7: x=1347, y=482, w=11, h=6
-Region 8: x=1324, y=481, w=19, h=26
-Region 9: x=1290, y=481, w=7, h=5
-Region 10: x=1218, y=481, w=7, h=5
-Region 11: x=1080, y=481, w=9, h=5
-Region 12: x=1049, y=481, w=8, h=5
-Region 13: x=857, y=481, w=9, h=5
-Region 14: x=1408, y=450, w=10, h=7
-Region 15: x=1383, y=430, w=157, h=29
-Region 16: x=221, y=414, w=11, h=9
-Region 17: x=94, y=406, w=19, h=10
-Region 18: x=1436, y=391, w=12, h=11
-Region 19: x=0, y=377, w=1920, h=703
-Region 20: x=184, y=371, w=24, h=19
-Region 21: x=473, y=370, w=28, h=21
-Region 22: x=1056, y=369, w=32, h=22
-Region 23: x=764, y=369, w=30, h=22
-Region 24: x=342, y=354, w=17, h=7
-Region 25: x=631, y=353, w=20, h=7
-Region 26: x=921, y=347, w=22, h=13
-Region 27: x=1201, y=346, w=38, h=14
-Region 28: x=1294, y=343, w=95, h=93
-Region 29: x=55, y=322, w=46, h=30
-Region 30: x=0, y=0, w=1920, h=624
+Region 1: x=86, y=1053, w=278, h=11
+Region 2: x=1050, y=1017, w=13, h=5
+Region 3: x=1177, y=933, w=10, h=6
+Region 4: x=1338, y=926, w=33, h=14
+Region 5: x=1126, y=926, w=14, h=17
+Region 6: x=1209, y=894, w=7, h=8
+Region 7: x=891, y=887, w=7, h=9
+Region 8: x=1276, y=882, w=7, h=7
+Region 9: x=1341, y=851, w=6, h=5
+Region 10: x=511, y=851, w=8, h=8
+Region 11: x=542, y=847, w=29, h=11
+Region 12: x=421, y=836, w=9, h=11
+Region 13: x=493, y=834, w=10, h=7
+Region 14: x=795, y=830, w=15, h=25
+Region 15: x=740, y=826, w=5, h=7
+Region 16: x=963, y=825, w=5, h=8
+Region 17: x=924, y=822, w=5, h=17
+Region 18: x=1185, y=820, w=7, h=13
+Region 19: x=1068, y=819, w=15, h=31
+Region 20: x=626, y=819, w=14, h=33
+Region 21: x=1225, y=818, w=10, h=15
+Region 22: x=1136, y=818, w=6, h=14
+Region 23: x=699, y=818, w=17, h=15
+Region 24: x=502, y=818, w=7, h=7
+Region 25: x=1002, y=815, w=10, h=18
+Region 26: x=821, y=815, w=23, h=40
+Region 27: x=804, y=815, w=5, h=5
+Region 28: x=1263, y=813, w=37, h=45
+Region 29: x=859, y=811, w=54, h=45
+Region 30: x=598, y=801, w=5, h=8
+Region 31: x=555, y=801, w=9, h=8
+Region 32: x=498, y=801, w=43, h=8
+Region 33: x=422, y=799, w=55, h=11
+Region 34: x=384, y=799, w=28, h=11
+Region 35: x=1201, y=783, w=13, h=8
+Region 36: x=862, y=782, w=65, h=14
+Region 37: x=1025, y=768, w=10, h=11
+Region 38: x=1110, y=767, w=8, h=8
+Region 39: x=1134, y=766, w=9, h=9
+Region 40: x=700, y=766, w=8, h=9
+Region 41: x=924, y=765, w=5, h=10
+Region 42: x=531, y=763, w=5, h=12
+Region 43: x=1223, y=762, w=9, h=13
+Region 44: x=963, y=762, w=5, h=13
+Region 45: x=1185, y=761, w=9, h=14
+Region 46: x=1003, y=761, w=9, h=13
+Region 47: x=515, y=761, w=7, h=15
+Region 48: x=1376, y=760, w=15, h=23
+Region 49: x=465, y=756, w=12, h=13
+Region 50: x=779, y=755, w=67, h=41
+Region 51: x=1264, y=751, w=36, h=44
+Region 52: x=623, y=743, w=48, h=25
+Region 53: x=1037, y=741, w=48, h=27
+Region 54: x=862, y=723, w=65, h=14
+Region 55: x=405, y=723, w=26, h=15
+Region 56: x=448, y=722, w=37, h=15
+Region 57: x=1025, y=714, w=10, h=5
+Region 58: x=532, y=709, w=5, h=8
+Region 59: x=740, y=708, w=5, h=8
+Region 60: x=700, y=705, w=9, h=12
+Region 61: x=515, y=705, w=5, h=12
+Region 62: x=1223, y=704, w=9, h=13
+Region 63: x=1182, y=704, w=12, h=13
+Region 64: x=1133, y=704, w=10, h=13
+Region 65: x=1110, y=704, w=8, h=7
+Region 66: x=1000, y=704, w=12, h=13
+Region 67: x=963, y=704, w=5, h=13
+Region 68: x=769, y=697, w=77, h=40
+Region 69: x=1318, y=693, w=32, h=102
+Region 70: x=1835, y=691, w=65, h=372
+Region 71: x=1033, y=684, w=52, h=24
+Region 72: x=623, y=683, w=48, h=25
+Region 73: x=1033, y=665, w=29, h=14
+Region 74: x=402, y=665, w=27, h=39
+Region 75: x=1318, y=664, w=32, h=15
+Region 76: x=649, y=664, w=22, h=15
+Region 77: x=635, y=652, w=7, h=8
+Region 78: x=963, y=651, w=5, h=7
+Region 79: x=700, y=651, w=9, h=7
+Region 80: x=515, y=651, w=8, h=7
+Region 81: x=1003, y=645, w=9, h=13
+Region 82: x=1223, y=642, w=9, h=16
+Region 83: x=531, y=642, w=7, h=11
+Region 84: x=1367, y=641, w=27, h=61
+Region 85: x=828, y=641, w=8, h=11
+Region 86: x=1305, y=640, w=7, h=19
+Region 87: x=1182, y=640, w=12, h=18
+Region 88: x=774, y=640, w=160, h=49
+Region 89: x=1264, y=638, w=36, h=98
+Region 90: x=1046, y=636, w=7, h=8
+Region 91: x=632, y=636, w=26, h=15
+Region 92: x=448, y=636, w=37, h=71
+Region 93: x=1206, y=612, w=7, h=6
+Region 94: x=1347, y=610, w=7, h=15
+Region 95: x=551, y=609, w=7, h=7
+Region 96: x=529, y=597, w=14, h=9
+Region 97: x=898, y=583, w=11, h=5
+Region 98: x=1252, y=534, w=8, h=5
+Region 99: x=1915, y=495, w=5, h=585
+Region 100: x=1134, y=447, w=8, h=7
+Region 101: x=1309, y=446, w=9, h=8
+Region 102: x=1283, y=445, w=17, h=8
+Region 103: x=1225, y=443, w=16, h=9
+Region 104: x=1168, y=438, w=24, h=9
+Region 105: x=439, y=394, w=21, h=9
+Region 106: x=1303, y=393, w=9, h=9
+Region 107: x=611, y=343, w=6, h=8
+Region 108: x=1197, y=336, w=6, h=9
+Region 109: x=636, y=336, w=9, h=9
+Region 110: x=464, y=331, w=48, h=44
+Region 111: x=1112, y=330, w=14, h=20
+Region 112: x=698, y=330, w=14, h=44
+Region 113: x=1043, y=322, w=21, h=23
+Region 114: x=911, y=322, w=61, h=52
+Region 115: x=1003, y=321, w=20, h=23
+Region 116: x=1282, y=320, w=11, h=41
+Region 117: x=838, y=320, w=51, h=54
+Region 118: x=781, y=315, w=19, h=10
+Region 119: x=740, y=315, w=30, h=11
+Region 120: x=606, y=315, w=40, h=11
+Region 121: x=548, y=315, w=21, h=30
+Region 122: x=491, y=315, w=47, h=37
+Region 123: x=1300, y=314, w=11, h=43
+Region 124: x=444, y=314, w=14, h=60
+Region 125: x=349, y=314, w=68, h=61
+Region 126: x=1345, y=313, w=17, h=51
+Region 127: x=348, y=305, w=25, h=49
+Region 128: x=906, y=291, w=65, h=16
+Region 129: x=825, y=291, w=65, h=16
+Region 130: x=534, y=288, w=8, h=7
+Region 131: x=968, y=273, w=12, h=7
+Region 132: x=784, y=273, w=5, h=12
+Region 133: x=1043, y=272, w=21, h=14
+Region 134: x=1003, y=272, w=10, h=13
+Region 135: x=634, y=272, w=11, h=9
+Region 136: x=560, y=272, w=10, h=13
+Region 137: x=1314, y=270, w=11, h=8
+Region 138: x=509, y=270, w=20, h=28
+Region 139: x=813, y=268, w=5, h=12
+Region 140: x=579, y=261, w=9, h=36
+Region 141: x=1150, y=259, w=11, h=46
+Region 142: x=565, y=259, w=7, h=6
+Region 143: x=357, y=254, w=5, h=5
+Region 144: x=667, y=252, w=49, h=46
+Region 145: x=1082, y=251, w=56, h=26
+Region 146: x=1178, y=247, w=26, h=54
+Region 147: x=1083, y=233, w=21, h=14
+Region 148: x=817, y=233, w=74, h=15
+Region 149: x=667, y=233, w=22, h=14
+Region 150: x=904, y=223, w=74, h=25
+Region 151: x=561, y=220, w=5, h=7
+Region 152: x=699, y=217, w=6, h=6
+Region 153: x=1114, y=213, w=10, h=11
+Region 154: x=1003, y=213, w=21, h=13
+Region 155: x=636, y=213, w=9, h=9
+Region 156: x=1043, y=212, w=21, h=14
+Region 157: x=1231, y=210, w=14, h=7
+Region 158: x=563, y=208, w=6, h=7
+Region 159: x=509, y=208, w=20, h=36
+Region 160: x=1255, y=198, w=120, h=109
+Region 161: x=1154, y=198, w=7, h=52
+Region 162: x=1097, y=198, w=15, h=9
+Region 163: x=851, y=198, w=8, h=5
+Region 164: x=812, y=198, w=7, h=7
+Region 165: x=732, y=198, w=8, h=5
+Region 166: x=664, y=198, w=36, h=8
+Region 167: x=1178, y=188, w=24, h=62
+Region 168: x=565, y=188, w=24, h=60
+Region 169: x=532, y=180, w=13, h=6
+Region 170: x=1407, y=167, w=28, h=14
+Region 171: x=300, y=166, w=32, h=21
+Region 172: x=1222, y=165, w=37, h=32
+Region 173: x=354, y=163, w=146, h=144
+Region 174: x=1312, y=159, w=8, h=9
+Region 175: x=1380, y=156, w=8, h=43
+Region 176: x=472, y=95, w=44, h=84
+Region 177: x=1289, y=87, w=51, h=70
+Region 178: x=1326, y=15, w=579, h=84
+Region 179: x=67, y=14, w=18, h=552
+Region 180: x=0, y=0, w=9, h=1080
 
 ======================================
