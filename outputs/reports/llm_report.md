@@ -1,73 +1,3 @@
-======================================
-ENGINEERING DRAWING DIFFERENCE REPORT
-======================================
-
-Generated At: 2026-07-10T17:41:18.861119
-
-INPUT FILES
-File 1: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\c4cf4af2c67c47f7ab4a99139cdab0a8.pdf
-File 2: C:\Users\kanis\AI_Engineering_Drawing_Difference\uploads\temp\8ebcbf2ef3d7414fa37a9f8250b6e45f.pdf
-
-SUMMARY STATISTICS
-SSIM Score: 0.9235
-Total Pixels: 2073600
-Changed Pixels: 144925
-Percentage Change: 6.99%
-Total Regions: 15
-Largest Region Area: 284888
-Smallest Region Area: 496
-Average Region Area: 41580.86666666667
-Severity: HIGH
-Change Breakdown: 1 Added, 1 Removed, 10 Modified
-
-FINAL CONCLUSION
-15 revision region(s) detected. Approximately 6.99% of the drawing differs from the reference. SSIM similarity score is 0.9235. Breakdown: 1 added, 1 removed, 10 modified. Significant structural or annotation changes detected. Engineering validation required.
-
-CHANGED REGIONS (Bounding Boxes)
-Region 1 [Geometry Change] [Grid F4]: x=774, y=749, w=42, h=20 (ink: 0.325 -> 0.365) | OCR: [No text/empty] -> [No text/empty]
-Region 2 [Geometry Change] [Grid F4]: x=709, y=749, w=62, h=26 (ink: 0.252 -> 0.241) | OCR: [No text/empty] -> [No text/empty]
-Region 3 [Modified] [Grid E3]: x=625, y=660, w=77, h=18 (ink: 0.225 -> 0.199) | OCR: 'oom,--a8ane
-wt-w--y--4' -> 'ow.
-[eneann'
-Region 4 [Modified] [Grid E7]: x=1439, y=658, w=48, h=21 (ink: 0.252 -> 0.277) | OCR: 'me' -> 'gE'
-Region 5 [Modified] [Grid F4]: x=0, y=649, w=1912, h=149 (ink: 0.053 -> 0.057) | OCR: 'eS ewone
-) ares i dh,
-RE .
-Gmmae+anp
-3' -> 'na H Hh H T ae __YEnonoceneennes
-me'
-Region 6 [Modified] [Grid E6]: x=1372, y=638, w=75, h=23 (ink: 0.151 -> 0.149) | OCR: 'p' -> 'p'
-Region 7 [Geometry Change] [Grid E2]: x=254, y=626, w=48, h=19 (ink: 0.426 -> 0.499) | OCR: [No text/empty] -> [No text/empty]
-Region 8 [Modified] [Grid E1]: x=185, y=619, w=48, h=22 (ink: 0.597 -> 0.554) | OCR: 'Co' -> 'oe'
-Region 9 [Modified] [Grid E4]: x=370, y=605, w=998, h=58 (ink: 0.231 -> 0.222) | OCR: 'T o_o aoe eee - ooo i' -> 'Tr oe 7 - apres 7 oe i
-ow.-8aee i a'
-Region 10 [Removed] [Grid E8]: x=1578, y=534, w=333, h=106 (ink: 0.074 -> 0.083) | OCR: 'rr
-fD-sn
-apsavemeen
---_enevencee
-_nancees
--_--eaeeewenseen
-mow' -> [No text/empty]
-Region 11 [Added] [Grid D4]: x=775, y=514, w=31, h=16 (ink: 0.371 -> 0.345) | OCR: [No text/empty] -> 'Ls
-bind
-_2:one'
-Region 12 [Modified] [Grid D2]: x=209, y=481, w=63, h=26 (ink: 0.245 -> 0.291) | OCR: '2' -> 'a'
-Region 13 [Modified] [Grid D7]: x=1603, y=468, w=118, h=25 (ink: 0.255 -> 0.229) | OCR: '8eGar.cateeeD
-WencerrsWane
-RIEDRUPSPare' -> 'ae.
-we-ssceenswanne
-PPaee'
-Region 14 [Modified] [Grid C1]: x=52, y=312, w=53, h=40 (ink: 0.290 -> 0.283) | OCR: 'ZB' -> 'A'
-Region 15 [Modified] [Grid C5]: x=11, y=287, w=1900, h=121 (ink: 0.038 -> 0.038) | OCR: 'S-,_eneese Se
-P - __7 + 4 _ es
-_-.,#... _) f t) . 7w5eaQubas yy' -> 'l _ owe __ _ ove owen owe : wonCenaeneMOCen,aEOOSD
-u *- J 1 _ _ as _
-se_. aa, _ [____ESFAVURAARS)'
-
-======================================
-AI-GENERATED ENGINEERING ANALYSIS
-======================================
-
 ## Engineering Revision Analysis & Impact Report: Revision A to B
 
 ### 1. Executive Summary
@@ -111,5 +41,3 @@ Quality Control (QC) and Inspection teams must prioritize a detailed visual comp
 *   **Low Risk:** Minor textual changes (E7, E6, E1, D2, C1) are less likely to cause critical issues but still require verification to ensure accuracy in labels, units, or revision tracking. 
 
 **Overall Risk:** Moderate to High. The combination of numerous changes and significant OCR ambiguity in critical areas elevates the risk profile. A mandatory, comprehensive manual review by relevant engineering, manufacturing, and quality personnel is required before approving Revision B for release.
-
-======================================

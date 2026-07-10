@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from pathlib import Path
 import cv2
 import numpy as np
@@ -23,34 +23,108 @@ class ImageVisualizer:
         return image
 
     # -------------------------
-    # Draw bounding boxes
+    # Draw a single numbered, color-coded box onto an image (in place)
     # -------------------------
-    def draw_boxes(
+    def _draw_single_box(
         self,
         image: np.ndarray,
+        box: Dict[str, int],
+        idx: int,
+        color: Tuple[int, int, int],
+    ) -> None:
+
+        x, y, w, h = box["x"], box["y"], box["w"], box["h"]
+
+        cv2.rectangle(
+            image,
+            (x, y),
+            (x + w, y + h),
+            color,
+            ProjectConfig.BOUNDING_BOX_THICKNESS,
+        )
+
+        label = str(idx)
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 0.6
+        thickness = 2
+
+        (text_w, text_h), baseline = cv2.getTextSize(
+            label, font, font_scale, thickness
+        )
+
+        tag_y2 = max(y, text_h + baseline + 6)
+        tag_y1 = tag_y2 - text_h - baseline - 6
+
+        cv2.rectangle(
+            image,
+            (x, tag_y1),
+            (x + text_w + 10, tag_y2),
+            color,
+            -1,
+        )
+        cv2.putText(
+            image,
+            label,
+            (x + 5, tag_y2 - baseline - 3),
+            font,
+            font_scale,
+            (255, 255, 255),
+            thickness,
+        )
+
+    # -------------------------
+    # Before / After annotated pair
+    # -------------------------
+    def draw_annotated_pair(
+        self,
+        img1: np.ndarray,
+        img2: np.ndarray,
         boxes: List[Dict[str, int]],
-    ) -> np.ndarray:
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Produces two annotated images -- Before and After -- with the
+        same numbered, color-coded boxes so a specific change can be
+        cross-referenced directly between the two drawings.
+
+        Which side(s) a box is drawn on depends on its change_type:
+          - "Removed"  -> Before only (content existed, then vanished)
+          - "Added"    -> After only  (content didn't exist, then appeared)
+          - "Modified" -> both sides, same number (content changed but
+                          exists in both)
+        Boxes without a change_type (e.g. legacy callers) are drawn on
+        both sides, matching the old draw_boxes behavior.
+        """
 
         try:
-            self.logger.info("Drawing bounding boxes")
+            self.logger.info("Drawing Before/After annotated pair")
 
-            output = image.copy()
+            before = self._to_uint8(img1.copy())
+            after = self._to_uint8(img2.copy())
 
-            for b in boxes:
-                x, y, w, h = b["x"], b["y"], b["w"], b["h"]
+            if len(before.shape) == 2:
+                before = cv2.cvtColor(before, cv2.COLOR_GRAY2BGR)
+            if len(after.shape) == 2:
+                after = cv2.cvtColor(after, cv2.COLOR_GRAY2BGR)
 
-                cv2.rectangle(
-                    output,
-                    (x, y),
-                    (x + w, y + h),
-                    ProjectConfig.BOUNDING_BOX_COLOR,
-                    ProjectConfig.BOUNDING_BOX_THICKNESS,
+            for idx, b in enumerate(boxes, start=1):
+                change_type = b.get("change_type")
+                color = ProjectConfig.CHANGE_TYPE_COLORS.get(
+                    change_type, ProjectConfig.BOUNDING_BOX_COLOR
                 )
 
-            return output
+                draw_before = change_type in ("Removed", "Modified", None)
+                draw_after = change_type in ("Added", "Modified", None)
+
+                if draw_before:
+                    self._draw_single_box(before, b, idx, color)
+
+                if draw_after:
+                    self._draw_single_box(after, b, idx, color)
+
+            return before, after
 
         except Exception as e:
-            self.logger.error(f"Box drawing failed: {e}")
+            self.logger.error(f"Before/After annotation failed: {e}")
             raise
 
     # -------------------------
@@ -185,19 +259,24 @@ class ImageVisualizer:
 
             outputs = []
 
-            # 1. Bounding boxes
-            boxed = self.draw_boxes(img1, boxes)
-            outputs.append(self.save_image(boxed, "boxes.png"))
+            # 1 & 2. Before / After annotated pair -- the main output.
+            # Same numbered, color-coded boxes on each side so a given
+            # change can be cross-referenced between the two drawings.
+            before_annotated, after_annotated = self.draw_annotated_pair(
+                img1, img2, boxes
+            )
+            outputs.append(self.save_image(before_annotated, "before_annotated.png"))
+            outputs.append(self.save_image(after_annotated, "after_annotated.png"))
 
-            # 2. Heatmap
+            # 3. Heatmap
             heatmap = self.create_heatmap(diff_mask)
             outputs.append(self.save_image(heatmap, "heatmap.png"))
 
-            # 3. Overlay
+            # 4. Overlay
             overlay = self.overlay_diff(img1, diff_mask)
             outputs.append(self.save_image(overlay, "overlay.png"))
 
-            # 4. Side-by-side
+            # 5. Side-by-side (unannotated, quick visual reference)
             side = self.side_by_side(img1, img2)
             outputs.append(self.save_image(side, "side_by_side.png"))
 

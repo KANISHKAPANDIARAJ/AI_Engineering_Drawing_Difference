@@ -146,7 +146,9 @@ class ImagePreprocessor:
             img1_gray = self._to_grayscale(img1)
             img2_gray = self._to_grayscale(img2)
 
-            orb = cv2.ORB_create()
+            # More features helps on line-drawing content where ORB has
+            # fewer strong corners to work with than photos.
+            orb = cv2.ORB_create(nfeatures=3000)
 
             kp1, des1 = orb.detectAndCompute(img1_gray, None)
             kp2, des2 = orb.detectAndCompute(img2_gray, None)
@@ -163,23 +165,66 @@ class ImagePreprocessor:
             matches = bf.match(des1, des2)
 
             if len(matches) < 10:
-                self.logger.warning("Not enough matches for homography")
+                self.logger.warning("Not enough matches for homography, skipping alignment")
                 return img1, img2
 
             matches = sorted(matches, key=lambda x: x.distance)
-            good = matches[: min(50, len(matches))]
+            good = matches[: min(80, len(matches))]
 
             pts1 = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
             pts2 = np.float32([kp2[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
 
-            H, _ = cv2.findHomography(pts2, pts1, cv2.RANSAC, 5.0)
+            H, inlier_mask = cv2.findHomography(pts2, pts1, cv2.RANSAC, 5.0)
 
-            if H is None:
-                self.logger.warning("Homography estimation failed")
+            if H is None or inlier_mask is None:
+                self.logger.warning("Homography estimation failed, skipping alignment")
+                return img1, img2
+
+            # -----------------------------------------------------------
+            # Quality check: on engineering drawings, ORB frequently
+            # matches repetitive features (grid lines, hatching, similar
+            # corners) which can produce a homography that satisfies
+            # RANSAC's threshold on paper but is actually wrong. A low
+            # inlier count/ratio is a strong signal of exactly that --
+            # in that case it's safer to skip alignment entirely than to
+            # apply a bad warp that manufactures fake "differences".
+            # -----------------------------------------------------------
+            num_inliers = int(inlier_mask.sum())
+            inlier_ratio = num_inliers / len(good)
+
+            if (
+                num_inliers < ProjectConfig.ALIGNMENT_MIN_INLIERS
+                or inlier_ratio < ProjectConfig.ALIGNMENT_MIN_INLIER_RATIO
+            ):
+                self.logger.warning(
+                    f"Homography unreliable (inliers={num_inliers}/{len(good)}, "
+                    f"ratio={inlier_ratio:.2f}) - skipping alignment"
+                )
                 return img1, img2
 
             h, w = img1.shape[:2]
-            img2_aligned = cv2.warpPerspective(img2, H, (w, h))
+
+            # -----------------------------------------------------------
+            # Fill any area exposed by the warp with white (matching the
+            # drawing's background) instead of the OpenCV default of
+            # black. Black fill was the main cause of huge false
+            # "difference" regions along the page edges whenever the
+            # homography introduced even a slight rotation or shift --
+            # white-on-white edges stay similar, black-on-white edges do
+            # not.
+            # -----------------------------------------------------------
+            img2_aligned = cv2.warpPerspective(
+                img2,
+                H,
+                (w, h),
+                borderMode=cv2.BORDER_CONSTANT,
+                borderValue=(255, 255, 255),
+            )
+
+            self.logger.info(
+                f"Alignment accepted (inliers={num_inliers}/{len(good)}, "
+                f"ratio={inlier_ratio:.2f})"
+            )
 
             return img1, img2_aligned
 

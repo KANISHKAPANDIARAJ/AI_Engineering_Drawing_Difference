@@ -21,6 +21,7 @@ class ReportGenerator:
         file2: str,
         summary: Dict[str, Any],
         boxes: List[Dict[str, int]],
+        llm_report: str = None,
     ) -> Dict[str, str]:
 
         try:
@@ -33,11 +34,18 @@ class ReportGenerator:
                 "file_1": file1,
                 "file_2": file2,
                 "summary": summary,
-                "changed_regions": boxes
+                "changed_regions": boxes,
+                "llm_report": llm_report
             }
 
             txt_path = self._generate_txt_report(report_data)
             json_path = self._generate_json_report(report_data)
+
+            if llm_report:
+                md_path = self.output_dir / "llm_report.md"
+                with open(md_path, "w", encoding="utf-8") as f:
+                    f.write(llm_report)
+                self.logger.info(f"Saved separate LLM markdown report to {md_path}")
 
             self.logger.info("Report generation completed")
 
@@ -81,7 +89,20 @@ class ReportGenerator:
         lines.append(f"Largest Region Area: {summary.get('largest_region_area')}")
         lines.append(f"Smallest Region Area: {summary.get('smallest_region_area')}")
         lines.append(f"Average Region Area: {summary.get('average_region_area')}")
-        lines.append(f"Severity: {summary.get('severity')}\n")
+        lines.append(f"Severity: {summary.get('severity')}")
+
+        # Added / Removed / Modified breakdown -- only shown if the
+        # summary actually carries it (keeps this backward compatible
+        # with older summary dicts that don't have the key).
+        counts = summary.get("change_type_counts")
+        if counts:
+            lines.append(
+                f"Change Breakdown: {counts.get('Added', 0)} Added, "
+                f"{counts.get('Removed', 0)} Removed, "
+                f"{counts.get('Modified', 0)} Modified"
+            )
+
+        lines.append("")
 
         lines.append("FINAL CONCLUSION")
         lines.append(summary.get("conclusion", ""))
@@ -91,9 +112,35 @@ class ReportGenerator:
             lines.append("No significant regions detected.")
         else:
             for i, b in enumerate(boxes, 1):
-                lines.append(
-                    f"Region {i}: x={b['x']}, y={b['y']}, w={b['w']}, h={b['h']}"
+                change_type = b.get("change_type")
+                type_tag = f" [{change_type}]" if change_type else ""
+                grid_tag = f" [Grid {b['grid']}]" if "grid" in b else ""
+
+                line = (
+                    f"Region {i}{type_tag}{grid_tag}: "
+                    f"x={b['x']}, y={b['y']}, w={b['w']}, h={b['h']}"
                 )
+
+                # Ink-density readout is a nice sanity check when
+                # reviewing why something got classified a certain way,
+                # but only include it if present.
+                if "ink_before" in b and "ink_after" in b:
+                    line += (
+                        f" (ink: {b['ink_before']:.3f} -> {b['ink_after']:.3f})"
+                    )
+
+                if "before_text" in b or "after_text" in b:
+                    before_str = f"'{b['before_text']}'" if b.get("before_text") else "[No text/empty]"
+                    after_str = f"'{b['after_text']}'" if b.get("after_text") else "[No text/empty]"
+                    line += f" | OCR: {before_str} -> {after_str}"
+
+                lines.append(line)
+
+        if data.get("llm_report"):
+            lines.append("\n======================================")
+            lines.append("AI-GENERATED ENGINEERING ANALYSIS")
+            lines.append("======================================\n")
+            lines.append(data["llm_report"])
 
         lines.append("\n======================================")
 
@@ -111,6 +158,9 @@ class ReportGenerator:
 
         path = self.output_dir / "report.json"
 
+        # boxes already carry change_type / ink_before / ink_after
+        # (set by ImageComparator.classify_regions), so they flow
+        # through into the JSON report with no extra work needed here.
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 

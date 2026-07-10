@@ -63,6 +63,12 @@ class SummaryGenerator:
                 "average_region_area": region_stats["average_region_area"],
                 "total_changed_area": region_stats["total_area"],
 
+                # Added / Removed / Modified breakdown, derived from each
+                # region's "change_type" field (set by ImageComparator's
+                # ink-density classification). Falls back to all zeros if
+                # boxes weren't classified (keeps this backward compatible).
+                "change_type_counts": region_stats["change_type_counts"],
+
                 "ssim_score": round(ssim_score, 4) if ssim_score is not None else None,
 
                 "severity": severity,
@@ -82,23 +88,33 @@ class SummaryGenerator:
     # -------------------------
     def _compute_region_statistics(self, boxes: List[Dict[str, int]]) -> Dict[str, Any]:
 
+        empty_counts = {"Added": 0, "Removed": 0, "Modified": 0}
+
         if not boxes:
             return {
                 "total_regions": 0,
                 "largest_region_area": 0,
                 "smallest_region_area": 0,
                 "average_region_area": 0,
-                "total_area": 0
+                "total_area": 0,
+                "change_type_counts": empty_counts,
             }
 
         areas = [b["w"] * b["h"] for b in boxes]
+
+        change_type_counts = dict(empty_counts)
+        for b in boxes:
+            ct = b.get("change_type")
+            if ct in change_type_counts:
+                change_type_counts[ct] += 1
 
         return {
             "total_regions": len(boxes),
             "largest_region_area": int(max(areas)),
             "smallest_region_area": int(min(areas)),
             "average_region_area": float(np.mean(areas)),
-            "total_area": int(np.sum(areas))
+            "total_area": int(np.sum(areas)),
+            "change_type_counts": change_type_counts,
         }
 
     # -------------------------
@@ -140,6 +156,7 @@ class SummaryGenerator:
     ) -> str:
 
         regions = region_stats["total_regions"]
+        counts = region_stats.get("change_type_counts", {})
 
         base = (
             f"{regions} revision region(s) detected. "
@@ -148,6 +165,16 @@ class SummaryGenerator:
 
         if ssim_score is not None:
             base += f"SSIM similarity score is {ssim_score:.4f}. "
+
+        # Only mention the breakdown if at least one region was actually
+        # classified -- keeps the sentence out of older-style calls where
+        # boxes don't carry a change_type.
+        if any(counts.values()):
+            base += (
+                f"Breakdown: {counts.get('Added', 0)} added, "
+                f"{counts.get('Removed', 0)} removed, "
+                f"{counts.get('Modified', 0)} modified. "
+            )
 
         if severity == "LOW":
             return base + (

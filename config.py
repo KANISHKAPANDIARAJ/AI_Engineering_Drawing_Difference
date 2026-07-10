@@ -100,8 +100,14 @@ class ProjectConfig:
     GAUSSIAN_KERNEL_SIZE: Final[tuple[int, int]] = (5, 5)
     MEDIAN_BLUR_KERNEL_SIZE: Final[int] = 3
 
-    MIN_CONTOUR_AREA: Final[int] = 100
+    # Minimum bounding-box area (in pixels) for a contour to count as a
+    # real "changed region". Raised from 100 -> 400 to filter out
+    # anti-aliasing specks and sub-pixel PDF rendering noise.
+    MIN_CONTOUR_AREA: Final[int] = 400
 
+    # Merges nearby fragments of the same real change into one region
+    # before noise-filtering runs. Reduced to (5,5)/2 iterations so
+    # different physical sections are kept as separate bounding boxes.
     MORPH_KERNEL_SIZE: Final[tuple[int, int]] = (5, 5)
     MORPH_ITERATIONS: Final[int] = 2
 
@@ -110,6 +116,66 @@ class ProjectConfig:
     # ------------------------------------------------------------------
     SSIM_FULL: Final[bool] = True
     USE_OTSU_THRESHOLD: Final[bool] = True
+
+    # Extra fixed floor applied on top of Otsu's threshold. Otsu alone
+    # can pick a very permissive cutoff on documents that are 95%+
+    # identical, letting minor rendering noise through. A pixel must be
+    # both a statistical outlier (Otsu) AND below this fixed similarity
+    # floor to count as "changed".
+    MIN_DIFF_INTENSITY: Final[int] = 140
+
+    # A contour whose bounding box exceeds this fraction of the total
+    # page area is treated as a residual alignment artifact rather than
+    # a real design change, and is dropped (with a log warning).
+    MAX_CONTOUR_AREA_RATIO: Final[float] = 0.15
+
+    # Contours thinner/longer than this aspect ratio (and below 5x
+    # MIN_CONTOUR_AREA) are treated as line-thickness / rendering-shift
+    # artifacts rather than real changes.
+    MAX_CONTOUR_ASPECT_RATIO: Final[float] = 12.0
+
+    # ------------------------------------------------------------------
+    # Alignment Quality Gate
+    # ------------------------------------------------------------------
+    # ORB can produce a homography that satisfies RANSAC on paper but is
+    # actually wrong -- common on engineering drawings with lots of
+    # repetitive features (grid lines, hatching, similar corners). If
+    # the accepted match set doesn't clear these bars, alignment is
+    # skipped entirely rather than applying an unreliable warp.
+    ALIGNMENT_MIN_INLIERS: Final[int] = 15
+    ALIGNMENT_MIN_INLIER_RATIO: Final[float] = 0.5
+
+    # ------------------------------------------------------------------
+    # Change Classification (Added / Removed / Modified)
+    # ------------------------------------------------------------------
+    # A pixel darker than this (0-255 grayscale) counts as "ink" -- part
+    # of a line, symbol, or text -- rather than blank paper.
+    INK_PIXEL_THRESHOLD: Final[int] = 200
+
+    # A region is treated as "empty" if less than this fraction of its
+    # pixels are ink. Used to tell Added (was empty, now has content)
+    # apart from Removed (had content, now empty) and Modified (content
+    # in both, but different).
+    EMPTY_REGION_INK_RATIO: Final[float] = 0.02
+
+    # Colors (BGR) used to draw each change type's bounding box.
+    CHANGE_TYPE_COLORS: Final[dict[str, tuple[int, int, int]]] = {
+        "Added": (0, 170, 0),       # green
+        "Removed": (0, 0, 255),     # red
+        "Modified": (0, 165, 255),  # amber
+    }
+
+    # ------------------------------------------------------------------
+    # OCR Settings (Tesseract & Grid mapping)
+    # ------------------------------------------------------------------
+    TESSERACT_CMD: Final[str] = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    OCR_PADDING: Final[int] = 10
+    OCR_UPSCALE_FACTOR: Final[int] = 2
+    OCR_PSM_MODE: Final[int] = 6
+    OCR_CHAR_WHITELIST: Final[str] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,+-°%/:*()[]#_ "
+
+    GRID_ROWS: Final[list[str]] = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    GRID_COLUMNS: Final[list[str]] = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
     # ------------------------------------------------------------------
     # Visualization Settings

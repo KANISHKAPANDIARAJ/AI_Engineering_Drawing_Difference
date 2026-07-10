@@ -1,1101 +1,237 @@
 {
-    "generated_at": "2026-07-02T05:38:31.721234",
-    "file_1": "C:\\Users\\kanis\\AI_Engineering_Drawing_Difference\\uploads\\temp\\44d12dadea3146b4847fcc17ba5b7de4.pdf",
-    "file_2": "C:\\Users\\kanis\\AI_Engineering_Drawing_Difference\\uploads\\temp\\55ce943451cb473c9188869007915b6d.pdf",
+    "generated_at": "2026-07-10T17:41:18.861119",
+    "file_1": "C:\\Users\\kanis\\AI_Engineering_Drawing_Difference\\uploads\\temp\\c4cf4af2c67c47f7ab4a99139cdab0a8.pdf",
+    "file_2": "C:\\Users\\kanis\\AI_Engineering_Drawing_Difference\\uploads\\temp\\8ebcbf2ef3d7414fa37a9f8250b6e45f.pdf",
     "summary": {
-        "generated_at": "2026-07-02T05:38:31.394769",
+        "generated_at": "2026-07-10T17:41:18.155656",
         "total_pixels": 2073600,
-        "changed_pixels": 108100,
-        "percentage_change": 5.21,
-        "total_regions": 180,
-        "largest_region_area": 48636,
-        "smallest_region_area": 25,
-        "average_region_area": 1303.05,
-        "total_changed_area": 234549,
-        "ssim_score": 0.9471,
-        "severity": "CRITICAL",
-        "conclusion": "180 revision region(s) detected. Approximately 5.21% of the drawing differs from the reference. SSIM similarity score is 0.9471. Critical modifications detected. Major design revisions present and require immediate review."
+        "changed_pixels": 144925,
+        "percentage_change": 6.99,
+        "total_regions": 15,
+        "largest_region_area": 284888,
+        "smallest_region_area": 496,
+        "average_region_area": 41580.86666666667,
+        "total_changed_area": 623713,
+        "change_type_counts": {
+            "Added": 1,
+            "Removed": 1,
+            "Modified": 10
+        },
+        "ssim_score": 0.9235,
+        "severity": "HIGH",
+        "conclusion": "15 revision region(s) detected. Approximately 6.99% of the drawing differs from the reference. SSIM similarity score is 0.9235. Breakdown: 1 added, 1 removed, 10 modified. Significant structural or annotation changes detected. Engineering validation required."
     },
     "changed_regions": [
         {
-            "x": 86,
-            "y": 1053,
-            "w": 278,
-            "h": 11
-        },
-        {
-            "x": 1050,
-            "y": 1017,
-            "w": 13,
-            "h": 5
-        },
-        {
-            "x": 1177,
-            "y": 933,
-            "w": 10,
-            "h": 6
-        },
-        {
-            "x": 1338,
-            "y": 926,
-            "w": 33,
-            "h": 14
-        },
-        {
-            "x": 1126,
-            "y": 926,
-            "w": 14,
-            "h": 17
-        },
-        {
-            "x": 1209,
-            "y": 894,
-            "w": 7,
-            "h": 8
-        },
-        {
-            "x": 891,
-            "y": 887,
-            "w": 7,
-            "h": 9
-        },
-        {
-            "x": 1276,
-            "y": 882,
-            "w": 7,
-            "h": 7
-        },
-        {
-            "x": 1341,
-            "y": 851,
-            "w": 6,
-            "h": 5
-        },
-        {
-            "x": 511,
-            "y": 851,
-            "w": 8,
-            "h": 8
-        },
-        {
-            "x": 542,
-            "y": 847,
-            "w": 29,
-            "h": 11
-        },
-        {
-            "x": 421,
-            "y": 836,
-            "w": 9,
-            "h": 11
-        },
-        {
-            "x": 493,
-            "y": 834,
-            "w": 10,
-            "h": 7
-        },
-        {
-            "x": 795,
-            "y": 830,
-            "w": 15,
-            "h": 25
-        },
-        {
-            "x": 740,
-            "y": 826,
-            "w": 5,
-            "h": 7
-        },
-        {
-            "x": 963,
-            "y": 825,
-            "w": 5,
-            "h": 8
-        },
-        {
-            "x": 924,
-            "y": 822,
-            "w": 5,
-            "h": 17
-        },
-        {
-            "x": 1185,
-            "y": 820,
-            "w": 7,
-            "h": 13
-        },
-        {
-            "x": 1068,
-            "y": 819,
-            "w": 15,
-            "h": 31
-        },
-        {
-            "x": 626,
-            "y": 819,
-            "w": 14,
-            "h": 33
-        },
-        {
-            "x": 1225,
-            "y": 818,
-            "w": 10,
-            "h": 15
-        },
-        {
-            "x": 1136,
-            "y": 818,
-            "w": 6,
-            "h": 14
-        },
-        {
-            "x": 699,
-            "y": 818,
-            "w": 17,
-            "h": 15
-        },
-        {
-            "x": 502,
-            "y": 818,
-            "w": 7,
-            "h": 7
-        },
-        {
-            "x": 1002,
-            "y": 815,
-            "w": 10,
-            "h": 18
-        },
-        {
-            "x": 821,
-            "y": 815,
-            "w": 23,
-            "h": 40
-        },
-        {
-            "x": 804,
-            "y": 815,
-            "w": 5,
-            "h": 5
-        },
-        {
-            "x": 1263,
-            "y": 813,
-            "w": 37,
-            "h": 45
-        },
-        {
-            "x": 859,
-            "y": 811,
-            "w": 54,
-            "h": 45
-        },
-        {
-            "x": 598,
-            "y": 801,
-            "w": 5,
-            "h": 8
-        },
-        {
-            "x": 555,
-            "y": 801,
-            "w": 9,
-            "h": 8
-        },
-        {
-            "x": 498,
-            "y": 801,
-            "w": 43,
-            "h": 8
-        },
-        {
-            "x": 422,
-            "y": 799,
-            "w": 55,
-            "h": 11
-        },
-        {
-            "x": 384,
-            "y": 799,
-            "w": 28,
-            "h": 11
-        },
-        {
-            "x": 1201,
-            "y": 783,
-            "w": 13,
-            "h": 8
-        },
-        {
-            "x": 862,
-            "y": 782,
-            "w": 65,
-            "h": 14
-        },
-        {
-            "x": 1025,
-            "y": 768,
-            "w": 10,
-            "h": 11
-        },
-        {
-            "x": 1110,
-            "y": 767,
-            "w": 8,
-            "h": 8
-        },
-        {
-            "x": 1134,
-            "y": 766,
-            "w": 9,
-            "h": 9
-        },
-        {
-            "x": 700,
-            "y": 766,
-            "w": 8,
-            "h": 9
-        },
-        {
-            "x": 924,
-            "y": 765,
-            "w": 5,
-            "h": 10
-        },
-        {
-            "x": 531,
-            "y": 763,
-            "w": 5,
-            "h": 12
-        },
-        {
-            "x": 1223,
-            "y": 762,
-            "w": 9,
-            "h": 13
-        },
-        {
-            "x": 963,
-            "y": 762,
-            "w": 5,
-            "h": 13
-        },
-        {
-            "x": 1185,
-            "y": 761,
-            "w": 9,
-            "h": 14
-        },
-        {
-            "x": 1003,
-            "y": 761,
-            "w": 9,
-            "h": 13
-        },
-        {
-            "x": 515,
-            "y": 761,
-            "w": 7,
-            "h": 15
-        },
-        {
-            "x": 1376,
-            "y": 760,
-            "w": 15,
-            "h": 23
-        },
-        {
-            "x": 465,
-            "y": 756,
-            "w": 12,
-            "h": 13
-        },
-        {
-            "x": 779,
-            "y": 755,
-            "w": 67,
-            "h": 41
-        },
-        {
-            "x": 1264,
-            "y": 751,
-            "w": 36,
-            "h": 44
-        },
-        {
-            "x": 623,
-            "y": 743,
-            "w": 48,
-            "h": 25
-        },
-        {
-            "x": 1037,
-            "y": 741,
-            "w": 48,
-            "h": 27
-        },
-        {
-            "x": 862,
-            "y": 723,
-            "w": 65,
-            "h": 14
-        },
-        {
-            "x": 405,
-            "y": 723,
-            "w": 26,
-            "h": 15
-        },
-        {
-            "x": 448,
-            "y": 722,
-            "w": 37,
-            "h": 15
-        },
-        {
-            "x": 1025,
-            "y": 714,
-            "w": 10,
-            "h": 5
-        },
-        {
-            "x": 532,
-            "y": 709,
-            "w": 5,
-            "h": 8
-        },
-        {
-            "x": 740,
-            "y": 708,
-            "w": 5,
-            "h": 8
-        },
-        {
-            "x": 700,
-            "y": 705,
-            "w": 9,
-            "h": 12
-        },
-        {
-            "x": 515,
-            "y": 705,
-            "w": 5,
-            "h": 12
-        },
-        {
-            "x": 1223,
-            "y": 704,
-            "w": 9,
-            "h": 13
-        },
-        {
-            "x": 1182,
-            "y": 704,
-            "w": 12,
-            "h": 13
-        },
-        {
-            "x": 1133,
-            "y": 704,
-            "w": 10,
-            "h": 13
-        },
-        {
-            "x": 1110,
-            "y": 704,
-            "w": 8,
-            "h": 7
-        },
-        {
-            "x": 1000,
-            "y": 704,
-            "w": 12,
-            "h": 13
-        },
-        {
-            "x": 963,
-            "y": 704,
-            "w": 5,
-            "h": 13
-        },
-        {
-            "x": 769,
-            "y": 697,
-            "w": 77,
-            "h": 40
-        },
-        {
-            "x": 1318,
-            "y": 693,
-            "w": 32,
-            "h": 102
-        },
-        {
-            "x": 1835,
-            "y": 691,
-            "w": 65,
-            "h": 372
-        },
-        {
-            "x": 1033,
-            "y": 684,
-            "w": 52,
-            "h": 24
-        },
-        {
-            "x": 623,
-            "y": 683,
-            "w": 48,
-            "h": 25
-        },
-        {
-            "x": 1033,
-            "y": 665,
-            "w": 29,
-            "h": 14
-        },
-        {
-            "x": 402,
-            "y": 665,
-            "w": 27,
-            "h": 39
-        },
-        {
-            "x": 1318,
-            "y": 664,
-            "w": 32,
-            "h": 15
-        },
-        {
-            "x": 649,
-            "y": 664,
-            "w": 22,
-            "h": 15
-        },
-        {
-            "x": 635,
-            "y": 652,
-            "w": 7,
-            "h": 8
-        },
-        {
-            "x": 963,
-            "y": 651,
-            "w": 5,
-            "h": 7
-        },
-        {
-            "x": 700,
-            "y": 651,
-            "w": 9,
-            "h": 7
-        },
-        {
-            "x": 515,
-            "y": 651,
-            "w": 8,
-            "h": 7
-        },
-        {
-            "x": 1003,
-            "y": 645,
-            "w": 9,
-            "h": 13
-        },
-        {
-            "x": 1223,
-            "y": 642,
-            "w": 9,
-            "h": 16
-        },
-        {
-            "x": 531,
-            "y": 642,
-            "w": 7,
-            "h": 11
-        },
-        {
-            "x": 1367,
-            "y": 641,
-            "w": 27,
-            "h": 61
-        },
-        {
-            "x": 828,
-            "y": 641,
-            "w": 8,
-            "h": 11
-        },
-        {
-            "x": 1305,
-            "y": 640,
-            "w": 7,
-            "h": 19
-        },
-        {
-            "x": 1182,
-            "y": 640,
-            "w": 12,
-            "h": 18
-        },
-        {
             "x": 774,
-            "y": 640,
-            "w": 160,
-            "h": 49
+            "y": 749,
+            "w": 42,
+            "h": 20,
+            "change_type": "Geometry Change",
+            "ink_before": 0.325,
+            "ink_after": 0.3655,
+            "grid": "F4",
+            "before_text": null,
+            "after_text": null,
+            "text_changed": false,
+            "description": "A non-textual element or graphic in grid F4 has been modified, or a subtle visual change occurred that OCR did not detect as text."
         },
         {
-            "x": 1264,
-            "y": 638,
-            "w": 36,
-            "h": 98
+            "x": 709,
+            "y": 749,
+            "w": 62,
+            "h": 26,
+            "change_type": "Geometry Change",
+            "ink_before": 0.2519,
+            "ink_after": 0.2413,
+            "grid": "F4",
+            "before_text": null,
+            "after_text": null,
+            "text_changed": false,
+            "description": "A non-textual element or graphic in grid F4 has been modified, or a subtle visual change occurred that OCR did not detect as text."
         },
         {
-            "x": 1046,
-            "y": 636,
-            "w": 7,
-            "h": 8
+            "x": 625,
+            "y": 660,
+            "w": 77,
+            "h": 18,
+            "change_type": "Modified",
+            "ink_before": 0.2251,
+            "ink_after": 0.1991,
+            "grid": "E3",
+            "before_text": "oom,--a8ane\nwt-w--y--4",
+            "after_text": "ow.\n[eneann",
+            "text_changed": true,
+            "description": "Text content in grid E3 has been substantially modified, likely a note or descriptive label, with significant character changes and potential reformatting."
         },
         {
-            "x": 632,
-            "y": 636,
-            "w": 26,
-            "h": 15
-        },
-        {
-            "x": 448,
-            "y": 636,
-            "w": 37,
-            "h": 71
-        },
-        {
-            "x": 1206,
-            "y": 612,
-            "w": 7,
-            "h": 6
-        },
-        {
-            "x": 1347,
-            "y": 610,
-            "w": 7,
-            "h": 15
-        },
-        {
-            "x": 551,
-            "y": 609,
-            "w": 7,
-            "h": 7
-        },
-        {
-            "x": 529,
-            "y": 597,
-            "w": 14,
-            "h": 9
-        },
-        {
-            "x": 898,
-            "y": 583,
-            "w": 11,
-            "h": 5
-        },
-        {
-            "x": 1252,
-            "y": 534,
-            "w": 8,
-            "h": 5
-        },
-        {
-            "x": 1915,
-            "y": 495,
-            "w": 5,
-            "h": 585
-        },
-        {
-            "x": 1134,
-            "y": 447,
-            "w": 8,
-            "h": 7
-        },
-        {
-            "x": 1309,
-            "y": 446,
-            "w": 9,
-            "h": 8
-        },
-        {
-            "x": 1283,
-            "y": 445,
-            "w": 17,
-            "h": 8
-        },
-        {
-            "x": 1225,
-            "y": 443,
-            "w": 16,
-            "h": 9
-        },
-        {
-            "x": 1168,
-            "y": 438,
-            "w": 24,
-            "h": 9
-        },
-        {
-            "x": 439,
-            "y": 394,
-            "w": 21,
-            "h": 9
-        },
-        {
-            "x": 1303,
-            "y": 393,
-            "w": 9,
-            "h": 9
-        },
-        {
-            "x": 611,
-            "y": 343,
-            "w": 6,
-            "h": 8
-        },
-        {
-            "x": 1197,
-            "y": 336,
-            "w": 6,
-            "h": 9
-        },
-        {
-            "x": 636,
-            "y": 336,
-            "w": 9,
-            "h": 9
-        },
-        {
-            "x": 464,
-            "y": 331,
+            "x": 1439,
+            "y": 658,
             "w": 48,
-            "h": 44
-        },
-        {
-            "x": 1112,
-            "y": 330,
-            "w": 14,
-            "h": 20
-        },
-        {
-            "x": 698,
-            "y": 330,
-            "w": 14,
-            "h": 44
-        },
-        {
-            "x": 1043,
-            "y": 322,
-            "w": 21,
-            "h": 23
-        },
-        {
-            "x": 911,
-            "y": 322,
-            "w": 61,
-            "h": 52
-        },
-        {
-            "x": 1003,
-            "y": 321,
-            "w": 20,
-            "h": 23
-        },
-        {
-            "x": 1282,
-            "y": 320,
-            "w": 11,
-            "h": 41
-        },
-        {
-            "x": 838,
-            "y": 320,
-            "w": 51,
-            "h": 54
-        },
-        {
-            "x": 781,
-            "y": 315,
-            "w": 19,
-            "h": 10
-        },
-        {
-            "x": 740,
-            "y": 315,
-            "w": 30,
-            "h": 11
-        },
-        {
-            "x": 606,
-            "y": 315,
-            "w": 40,
-            "h": 11
-        },
-        {
-            "x": 548,
-            "y": 315,
-            "w": 21,
-            "h": 30
-        },
-        {
-            "x": 491,
-            "y": 315,
-            "w": 47,
-            "h": 37
-        },
-        {
-            "x": 1300,
-            "y": 314,
-            "w": 11,
-            "h": 43
-        },
-        {
-            "x": 444,
-            "y": 314,
-            "w": 14,
-            "h": 60
-        },
-        {
-            "x": 349,
-            "y": 314,
-            "w": 68,
-            "h": 61
-        },
-        {
-            "x": 1345,
-            "y": 313,
-            "w": 17,
-            "h": 51
-        },
-        {
-            "x": 348,
-            "y": 305,
-            "w": 25,
-            "h": 49
-        },
-        {
-            "x": 906,
-            "y": 291,
-            "w": 65,
-            "h": 16
-        },
-        {
-            "x": 825,
-            "y": 291,
-            "w": 65,
-            "h": 16
-        },
-        {
-            "x": 534,
-            "y": 288,
-            "w": 8,
-            "h": 7
-        },
-        {
-            "x": 968,
-            "y": 273,
-            "w": 12,
-            "h": 7
-        },
-        {
-            "x": 784,
-            "y": 273,
-            "w": 5,
-            "h": 12
-        },
-        {
-            "x": 1043,
-            "y": 272,
-            "w": 21,
-            "h": 14
-        },
-        {
-            "x": 1003,
-            "y": 272,
-            "w": 10,
-            "h": 13
-        },
-        {
-            "x": 634,
-            "y": 272,
-            "w": 11,
-            "h": 9
-        },
-        {
-            "x": 560,
-            "y": 272,
-            "w": 10,
-            "h": 13
-        },
-        {
-            "x": 1314,
-            "y": 270,
-            "w": 11,
-            "h": 8
-        },
-        {
-            "x": 509,
-            "y": 270,
-            "w": 20,
-            "h": 28
-        },
-        {
-            "x": 813,
-            "y": 268,
-            "w": 5,
-            "h": 12
-        },
-        {
-            "x": 579,
-            "y": 261,
-            "w": 9,
-            "h": 36
-        },
-        {
-            "x": 1150,
-            "y": 259,
-            "w": 11,
-            "h": 46
-        },
-        {
-            "x": 565,
-            "y": 259,
-            "w": 7,
-            "h": 6
-        },
-        {
-            "x": 357,
-            "y": 254,
-            "w": 5,
-            "h": 5
-        },
-        {
-            "x": 667,
-            "y": 252,
-            "w": 49,
-            "h": 46
-        },
-        {
-            "x": 1082,
-            "y": 251,
-            "w": 56,
-            "h": 26
-        },
-        {
-            "x": 1178,
-            "y": 247,
-            "w": 26,
-            "h": 54
-        },
-        {
-            "x": 1083,
-            "y": 233,
-            "w": 21,
-            "h": 14
-        },
-        {
-            "x": 817,
-            "y": 233,
-            "w": 74,
-            "h": 15
-        },
-        {
-            "x": 667,
-            "y": 233,
-            "w": 22,
-            "h": 14
-        },
-        {
-            "x": 904,
-            "y": 223,
-            "w": 74,
-            "h": 25
-        },
-        {
-            "x": 561,
-            "y": 220,
-            "w": 5,
-            "h": 7
-        },
-        {
-            "x": 699,
-            "y": 217,
-            "w": 6,
-            "h": 6
-        },
-        {
-            "x": 1114,
-            "y": 213,
-            "w": 10,
-            "h": 11
-        },
-        {
-            "x": 1003,
-            "y": 213,
-            "w": 21,
-            "h": 13
-        },
-        {
-            "x": 636,
-            "y": 213,
-            "w": 9,
-            "h": 9
-        },
-        {
-            "x": 1043,
-            "y": 212,
-            "w": 21,
-            "h": 14
-        },
-        {
-            "x": 1231,
-            "y": 210,
-            "w": 14,
-            "h": 7
-        },
-        {
-            "x": 563,
-            "y": 208,
-            "w": 6,
-            "h": 7
-        },
-        {
-            "x": 509,
-            "y": 208,
-            "w": 20,
-            "h": 36
-        },
-        {
-            "x": 1255,
-            "y": 198,
-            "w": 120,
-            "h": 109
-        },
-        {
-            "x": 1154,
-            "y": 198,
-            "w": 7,
-            "h": 52
-        },
-        {
-            "x": 1097,
-            "y": 198,
-            "w": 15,
-            "h": 9
-        },
-        {
-            "x": 851,
-            "y": 198,
-            "w": 8,
-            "h": 5
-        },
-        {
-            "x": 812,
-            "y": 198,
-            "w": 7,
-            "h": 7
-        },
-        {
-            "x": 732,
-            "y": 198,
-            "w": 8,
-            "h": 5
-        },
-        {
-            "x": 664,
-            "y": 198,
-            "w": 36,
-            "h": 8
-        },
-        {
-            "x": 1178,
-            "y": 188,
-            "w": 24,
-            "h": 62
-        },
-        {
-            "x": 565,
-            "y": 188,
-            "w": 24,
-            "h": 60
-        },
-        {
-            "x": 532,
-            "y": 180,
-            "w": 13,
-            "h": 6
-        },
-        {
-            "x": 1407,
-            "y": 167,
-            "w": 28,
-            "h": 14
-        },
-        {
-            "x": 300,
-            "y": 166,
-            "w": 32,
-            "h": 21
-        },
-        {
-            "x": 1222,
-            "y": 165,
-            "w": 37,
-            "h": 32
-        },
-        {
-            "x": 354,
-            "y": 163,
-            "w": 146,
-            "h": 144
-        },
-        {
-            "x": 1312,
-            "y": 159,
-            "w": 8,
-            "h": 9
-        },
-        {
-            "x": 1380,
-            "y": 156,
-            "w": 8,
-            "h": 43
-        },
-        {
-            "x": 472,
-            "y": 95,
-            "w": 44,
-            "h": 84
-        },
-        {
-            "x": 1289,
-            "y": 87,
-            "w": 51,
-            "h": 70
-        },
-        {
-            "x": 1326,
-            "y": 15,
-            "w": 579,
-            "h": 84
-        },
-        {
-            "x": 67,
-            "y": 14,
-            "w": 18,
-            "h": 552
+            "h": 21,
+            "change_type": "Modified",
+            "ink_before": 0.252,
+            "ink_after": 0.2768,
+            "grid": "E7",
+            "before_text": "me",
+            "after_text": "gE",
+            "text_changed": true,
+            "description": "A two-character text string in grid E7 has been modified from 'me' to 'gE', potentially indicating a unit or label change."
         },
         {
             "x": 0,
-            "y": 0,
-            "w": 9,
-            "h": 1080
+            "y": 649,
+            "w": 1912,
+            "h": 149,
+            "change_type": "Modified",
+            "ink_before": 0.0532,
+            "ink_after": 0.0573,
+            "grid": "F4",
+            "before_text": "eS ewone\n) ares i dh,\nRE .\nGmmae+anp\n3",
+            "after_text": "na H Hh H T ae __YEnonoceneennes\nme",
+            "text_changed": true,
+            "description": "A multi-line text block in grid F4, possibly containing notes or specifications, has undergone significant modification and reformatting."
+        },
+        {
+            "x": 1372,
+            "y": 638,
+            "w": 75,
+            "h": 23,
+            "change_type": "Modified",
+            "ink_before": 0.1513,
+            "ink_after": 0.149,
+            "grid": "E6",
+            "before_text": "p",
+            "after_text": "p",
+            "text_changed": false,
+            "description": "A single character 'p' in grid E6 appears to have been modified, though the OCR text content remains the same, suggesting a formatting or subtle visual alteration."
+        },
+        {
+            "x": 254,
+            "y": 626,
+            "w": 48,
+            "h": 19,
+            "change_type": "Geometry Change",
+            "ink_before": 0.4265,
+            "ink_after": 0.4989,
+            "grid": "E2",
+            "before_text": null,
+            "after_text": null,
+            "text_changed": false,
+            "description": "A non-textual element or graphic in grid E2 has been modified, or a subtle visual change occurred that OCR did not detect as text."
+        },
+        {
+            "x": 185,
+            "y": 619,
+            "w": 48,
+            "h": 22,
+            "change_type": "Modified",
+            "ink_before": 0.5966,
+            "ink_after": 0.554,
+            "grid": "E1",
+            "before_text": "Co",
+            "after_text": "oe",
+            "text_changed": true,
+            "description": "A two-character text string in grid E1 has been modified from 'Co' to 'oe', likely part of a larger label or identifier."
+        },
+        {
+            "x": 370,
+            "y": 605,
+            "w": 998,
+            "h": 58,
+            "change_type": "Modified",
+            "ink_before": 0.2307,
+            "ink_after": 0.2223,
+            "grid": "E4",
+            "before_text": "T o_o aoe eee - ooo i",
+            "after_text": "Tr oe 7 - apres 7 oe i\now.-8aee i a",
+            "text_changed": true,
+            "description": "A line of text in grid E4, possibly a dimension, part number, or descriptive line, has been significantly altered and extended."
+        },
+        {
+            "x": 1578,
+            "y": 534,
+            "w": 333,
+            "h": 106,
+            "change_type": "Removed",
+            "ink_before": 0.0744,
+            "ink_after": 0.0833,
+            "grid": "E8",
+            "before_text": "rr\nfD-sn\napsavemeen\n--_enevencee\n_nancees\n-_--eaeeewenseen\nmow",
+            "after_text": null,
+            "text_changed": true,
+            "description": "A multi-line block of text, potentially a note, specification, or instruction, has been entirely removed from grid E8."
+        },
+        {
+            "x": 775,
+            "y": 514,
+            "w": 31,
+            "h": 16,
+            "change_type": "Added",
+            "ink_before": 0.371,
+            "ink_after": 0.3448,
+            "grid": "D4",
+            "before_text": null,
+            "after_text": "Ls\nbind\n_2:one",
+            "text_changed": true,
+            "description": "A new multi-line text block, possibly a label or instruction, has been added to grid D4."
+        },
+        {
+            "x": 209,
+            "y": 481,
+            "w": 63,
+            "h": 26,
+            "change_type": "Modified",
+            "ink_before": 0.2454,
+            "ink_after": 0.2912,
+            "grid": "D2",
+            "before_text": "2",
+            "after_text": "a",
+            "text_changed": true,
+            "description": "A single character in grid D2 has been modified from '2' to 'a', potentially indicating a revision change or a numerical value update."
+        },
+        {
+            "x": 1603,
+            "y": 468,
+            "w": 118,
+            "h": 25,
+            "change_type": "Modified",
+            "ink_before": 0.2553,
+            "ink_after": 0.2285,
+            "grid": "D7",
+            "before_text": "8eGar.cateeeD\nWencerrsWane\nRIEDRUPSPare",
+            "after_text": "ae.\nwe-ssceenswanne\nPPaee",
+            "text_changed": true,
+            "description": "A multi-line text block in grid D7, likely containing notes or descriptive information, has been significantly modified and condensed."
+        },
+        {
+            "x": 52,
+            "y": 312,
+            "w": 53,
+            "h": 40,
+            "change_type": "Modified",
+            "ink_before": 0.2901,
+            "ink_after": 0.283,
+            "grid": "C1",
+            "before_text": "ZB",
+            "after_text": "A",
+            "text_changed": true,
+            "description": "A two-character text string 'ZB' in grid C1 has been modified to a single character 'A', possibly indicating a revision level or a part identifier change."
+        },
+        {
+            "x": 11,
+            "y": 287,
+            "w": 1900,
+            "h": 121,
+            "change_type": "Modified",
+            "ink_before": 0.038,
+            "ink_after": 0.0383,
+            "grid": "C5",
+            "before_text": "S-,_eneese Se\nP - __7 + 4 _ es\n_-.,#... _) f t) . 7w5eaQubas yy",
+            "after_text": "l _ owe __ _ ove owen owe : wonCenaeneMOCen,aEOOSD\nu *- J 1 _ _ as _\nse_. aa, _ [____ESFAVURAARS)",
+            "text_changed": true,
+            "description": "A large, complex block of text and potentially symbols in grid C5 has been extensively modified and re-structured, indicating a significant content revision."
         }
-    ]
+    ],
+    "llm_report": "## Engineering Revision Analysis & Impact Report: Revision A to B\n\n### 1. Executive Summary\nThis report details the changes identified between Revision A and Revision B of the engineering document. A total of 15 distinct regions were detected with modifications, resulting in an SSIM Similarity Score of 0.9235, indicating a moderate level of change. While the system's rule-based severity level is 'UNKNOWN', a detailed analysis reveals a mix of minor textual updates, significant text block modifications, additions, removals, and potential non-textual/geometric alterations. The overall scope suggests a moderate iteration, requiring careful review, particularly due to the poor OCR quality in several critical regions which necessitates manual visual verification.\n\n### 2. Detailed Revision Notes\n\n*   **Region 1 [Grid F4]:** A non-textual element or graphic has been modified, or a subtle visual change occurred that OCR did not detect as text.\n*   **Region 2 [Grid F4]:** Similar to Region 1, a non-textual element or graphic has been modified, or a subtle visual change occurred that OCR did not detect as text.\n*   **Region 3 [Grid E3]:** Text content, likely a note or descriptive label, has been substantially modified with significant character changes and potential reformatting.\n*   **Region 4 [Grid E7]:** A two-character text string has been modified from 'me' to 'gE', potentially indicating a unit or label change.\n*   **Region 5 [Grid F4]:** A multi-line text block, possibly containing notes or specifications, has undergone significant modification and reformatting.\n*   **Region 6 [Grid E6]:** A single character 'p' appears to have been modified, though the OCR text content remains the same, suggesting a formatting or subtle visual alteration.\n*   **Region 7 [Grid E2]:** A non-textual element or graphic has been modified, or a subtle visual change occurred that OCR did not detect as text.\n*   **Region 8 [Grid E1]:** A two-character text string has been modified from 'Co' to 'oe', likely part of a larger label or identifier.\n*   **Region 9 [Grid E4]:** A line of text, possibly a dimension, part number, or descriptive line, has been significantly altered and extended.\n*   **Region 10 [Grid E8]:** A multi-line block of text, potentially a note, specification, or instruction, has been entirely removed.\n*   **Region 11 [Grid D4]:** A new multi-line text block, possibly a label or instruction, has been added.\n*   **Region 12 [Grid D2]:** A single character has been modified from '2' to 'a', potentially indicating a revision change or a numerical value update.\n*   **Region 13 [Grid D7]:** A multi-line text block, likely containing notes or descriptive information, has been significantly modified and condensed.\n*   **Region 14 [Grid C1]:** A two-character text string 'ZB' has been modified to a single character 'A', possibly indicating a revision level or a part identifier change.\n*   **Region 15 [Grid C5]:** A large, complex block of text and potentially symbols has been extensively modified and re-structured, indicating a significant content revision.\n\n### 3. Engineering & Design Impact\nThe identified changes suggest updates across various design aspects. Textual modifications in regions like E3, F4, E4, D7, and C5 likely reflect revised specifications, design parameters, or descriptive notes. The removal of a text block in E8 could indicate simplification or obsolescence of previous instructions, while the addition in D4 introduces new design details or requirements. The non-textual changes in F4 (Regions 1, 2, 5) and E2 imply potential geometric alterations to the drawing, which could affect component form, fit, or function. Revision indicators in C1 and D2 suggest formal document control updates. Due to the poor OCR quality, particularly in regions with extensive text changes, a thorough visual inspection by the design engineer is crucial to ascertain the exact nature and intent of these modifications.\n\n### 4. Manufacturing & Production Impact\nChanges in textual content, especially in regions E3, F4, E4, D7, and C5, could directly impact manufacturing processes, material selection, tolerances, and assembly instructions. The removal of instructions in E8 and the addition of new ones in D4 will require updates to work instructions and potentially re-training for operators. Any underlying geometric changes (implied by non-textual modifications in F4, E2) could necessitate tooling adjustments, fixture modifications, or a re-evaluation of manufacturing sequences. The revision level changes (C1, D2) mandate updated documentation control and potentially new part numbering or revision tracking in the production system. Production planning and quality assurance teams must review these changes to prevent manufacturing errors or non-conformances.\n\n### 5. Quality Control & Inspection Notes\nQuality Control (QC) and Inspection teams must prioritize a detailed visual comparison of all identified changed regions. Particular attention should be paid to: \n*   **Critical Textual Changes:** Regions E3, F4, E4, D7, C5 for updated specifications, dimensions, or operational instructions. Manual verification is essential due to OCR limitations. \n*   **Removed/Added Content:** Confirm the intent and impact of the removed text in E8 and the newly added text in D4. \n*   **Geometric Changes:** Thoroughly inspect regions F4 (Regions 1, 2, 5) and E2 for any alterations to drawing geometry, features, or dimensions not captured by OCR. \n*   **Revision Control:** Verify that the revision indicators in C1 and D2 align with the official document control system. \n*   **Overall:** Given the 'UNKNOWN' severity and poor OCR in several areas, a 100% manual visual inspection of the changed regions is recommended to ensure accurate interpretation and compliance.\n\n### 6. Risk Assessment\n*   **High Risk:** The poor quality of OCR in several regions with significant text changes (E3, F4, E4, D7, C5) presents a high risk of misinterpretation, leading to potential design flaws, manufacturing errors, or non-conforming products if not manually verified. The exact nature of these changes is obscured. \n*   **Medium Risk:** Unidentified or subtle geometric changes in regions with no OCR text (F4, E2) could lead to fitment issues, functional failures, or assembly problems if not meticulously inspected visually. \n*   **Low Risk:** Minor textual changes (E7, E6, E1, D2, C1) are less likely to cause critical issues but still require verification to ensure accuracy in labels, units, or revision tracking. \n\n**Overall Risk:** Moderate to High. The combination of numerous changes and significant OCR ambiguity in critical areas elevates the risk profile. A mandatory, comprehensive manual review by relevant engineering, manufacturing, and quality personnel is required before approving Revision B for release."
 }

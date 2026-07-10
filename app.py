@@ -15,6 +15,8 @@ from modules.compare import ImageComparator
 from modules.visualization import ImageVisualizer
 from modules.summary import SummaryGenerator
 from modules.report_generator import ReportGenerator
+from modules.ocr_extractor import OCRExtractor
+from modules.llm_analyzer import LLMAnalyzer
 from utils.logger import get_logger
 
 
@@ -37,6 +39,8 @@ comparator = ImageComparator()
 visualizer = ImageVisualizer()
 summarizer = SummaryGenerator()
 reporter = ReportGenerator()
+ocr_extractor = OCRExtractor()
+llm_analyzer = LLMAnalyzer()
 
 
 # -------------------------
@@ -103,6 +107,12 @@ def process_images():
         # ---------------- COMPARE ----------------
         diff_mask, boxes, stats = comparator.compare(img1, img2)
 
+        # ---------------- OCR ----------------
+        boxes = ocr_extractor.extract_all(img1, img2, boxes)
+
+        # ---------------- LLM ANALYSIS ----------------
+        llm_report = llm_analyzer.generate_report(stats, boxes)
+
         # ---------------- SUMMARY ----------------
         summary = summarizer.generate_summary(
             diff_mask,
@@ -132,7 +142,8 @@ def process_images():
             str(file1_path),
             str(file2_path),
             summary,
-            boxes
+            boxes,
+            llm_report=llm_report
         )
 
         # Same rule: relative to OUTPUTS_DIR, no "outputs/" prefix.
@@ -140,6 +151,8 @@ def process_images():
             "txt_report": f"reports/{Path(reports['txt_report']).name}",
             "json_report": f"reports/{Path(reports['json_report']).name}"
         }
+        if llm_report:
+            clean_reports["md_report"] = "reports/llm_report.md"
 
         logger.info("Pipeline completed successfully")
 
@@ -147,7 +160,9 @@ def process_images():
             "summary": summary,
             "statistics": stats,
             "visualizations": viz_files,
-            "reports": clean_reports
+            "reports": clean_reports,
+            "llm_report": llm_report,
+            "regions": boxes
         })
 
     except Exception as e:
