@@ -37,6 +37,142 @@ Summary and Reporting
 Automated textual summary of differences
 JSON structured output
 Human-readable TXT report
+<h2><b>System Architecture</b></h2>
+
+                    +-------------------------+
+                    |      User Browser       |
+                    +-----------+-------------+
+                                |
+                                |
+                         Upload Drawings
+                                |
+                                v
+                     +----------------------+
+                     |      Flask App       |
+                     |       (app.py)       |
+                     +----------+-----------+
+                                |
+                                |
+        ----------------------------------------------------
+        |                  Main Processing Pipeline          |
+        ----------------------------------------------------
+                                |
+                                v
+                    +------------------------+
+                    | Input Validation       |
+                    | validate_file()        |
+                    +-----------+------------+
+                                |
+                                v
+                    +------------------------+
+                    | Save Uploaded Files    |
+                    | save_upload()          |
+                    +-----------+------------+
+                                |
+                                v
+                 +-----------------------------+
+                 | Image Preprocessor          |
+                 | preprocess.py               |
+                 |                             |
+                 | • PDF Conversion            |
+                 | • Resize                    |
+                 | • Gaussian Blur             |
+                 | • ORB Alignment             |
+                 | • Homography                |
+                 +-------------+---------------+
+                               |
+                               v
+                 +-----------------------------+
+                 | Image Comparator            |
+                 | compare.py                  |
+                 |                             |
+                 | • SSIM                      |
+                 | • Thresholding              |
+                 | • Morphology                |
+                 | • Contours                  |
+                 | • Bounding Boxes            |
+                 +-------------+---------------+
+                               |
+                               v
+                 +-----------------------------+
+                 | OCR Extractor               |
+                 | ocr_extractor.py            |
+                 |                             |
+                 | • Text Detection            |
+                 | • Before Text               |
+                 | • After Text                |
+                 +-------------+---------------+
+                               |
+                               v
+                 +-----------------------------+
+                 | LLM Analyzer                |
+                 | llm_analyzer.py             |
+                 |                             |
+                 | • AI Summary                |
+                 | • Revision Analysis         |
+                 | • Recommendations           |
+                 +-------------+---------------+
+                               |
+                               v
+                 +-----------------------------+
+                 | Summary Generator           |
+                 | summary.py                  |
+                 |                             |
+                 | • Similarity Score          |
+                 | • Severity                  |
+                 | • Statistics                |
+                 +-------------+---------------+
+                               |
+                               v
+                 +-----------------------------+
+                 | Visualization Generator     |
+                 | visualization.py            |
+                 |                             |
+                 | • Boxes                     |
+                 | • Overlay                   |
+                 | • Heatmap                   |
+                 | • Side-by-Side              |
+                 +-------------+---------------+
+                               |
+                               v
+                 +-----------------------------+
+                 | Report Generator            |
+                 | report_generator.py         |
+                 |                             |
+                 | • TXT                       |
+                 | • JSON                      |
+                 | • Markdown                  |
+                 | • HTML Report               |
+                 +-------------+---------------+
+                               |
+                               v
+                   outputs/
+                   ├── highlighted/
+                   ├── reports/
+                   └── last_result.json
+                               |
+                               v
+                     Flask Response (JSON)
+                               |
+                               v
+                  Dashboard (Vanilla JavaScript)
+                               |
+                               |
+        --------------------------------------------------
+        | Dashboard Features                              |
+        --------------------------------------------------
+        | • Similarity Gauge                              |
+        | • Change Statistics                             |
+        | • Drawing Viewer                               |
+        | • AI Summary                                   |
+        | • Region Table                                 |
+        | • Heatmap                                      |
+        | • Overlay                                      |
+        | • Download Reports                             |
+        --------------------------------------------------
+
+
+
 Tech Stack
 
 Backend:
@@ -54,24 +190,41 @@ CSS (Bootstrap-based styling)
 JavaScript (Vanilla JS)
 Project Structure
 
-app.py
-config.py
-modules/
-preprocess.py
-compare.py
-visualization.py
-summary.py
-report_generator.py
-utils/
-file_handler.py
-logger.py
-templates/
-index.html
-outputs/
-highlighted/
-reports/
-uploads/
-temp/
+<h3><b>Project Structure</b></h3>
+
+| Folder / File               | Description                                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **app.py**                  | Entry point of the Flask application. Handles routes, file uploads, processing pipeline, and API responses. |
+| **config.py**               | Stores project configurations such as paths, host, port, API keys, and application settings.                |
+| **requirements.txt**        | Lists all Python dependencies required to run the project.                                                  |
+| **modules/**                | Contains the core processing modules used in the comparison pipeline.                                       |
+| ├── **preprocess.py**       | Converts PDFs to images, resizes, aligns drawings using ORB, and performs preprocessing.                    |
+| ├── **compare.py**          | Performs SSIM comparison, difference detection, contour extraction, and region identification.              |
+| ├── **ocr_extractor.py**    | Extracts text from changed regions using OCR for before/after comparison.                                   |
+| ├── **llm_analyzer.py**     | Generates AI-powered engineering revision summaries and recommendations using an LLM.                       |
+| ├── **summary.py**          | Calculates similarity score, severity level, and overall statistics.                                        |
+| ├── **visualization.py**    | Generates bounding-box images, overlays, heatmaps, and side-by-side comparisons.                            |
+| └── **report_generator.py** | Creates TXT, JSON, Markdown, and printable report files.                                                    |
+| **utils/**                  | Utility functions used throughout the application.                                                          |
+| ├── **file_handler.py**     | Handles file validation, uploads, cleanup, and folder creation.                                             |
+| ├── **pdf_utils.py**        | Provides helper functions for PDF processing and conversion.                                                |
+| ├── **logger.py**           | Configures logging for debugging and application monitoring.                                                |
+| └── **constants.py**        | Stores reusable constants used across the project.                                                          |
+| **templates/**              | Jinja2 HTML templates rendered by Flask.                                                                    |
+| ├── **layout.html**         | Common layout shared by all pages.                                                                          |
+| ├── **index.html**          | Main dashboard for uploading and comparing drawings.                                                        |
+| └── **report.html**         | Printable HTML report generated after comparison.                                                           |
+| **static/**                 | Frontend static assets.                                                                                     |
+| ├── **css/**                | Stylesheets for the web interface.                                                                          |
+| ├── **js/**                 | JavaScript controlling the dashboard and API communication.                                                 |
+| └── **images/**             | Static images and icons used in the interface.                                                              |
+| **outputs/**                | Stores generated outputs after each comparison.                                                             |
+| ├── **highlighted/**        | Generated visualization images (boxes, overlays, heatmaps, etc.).                                           |
+| ├── **reports/**            | Generated TXT, JSON, Markdown, and downloadable reports.                                                    |
+| └── **last_result.json**    | Cached comparison result used by the report page.                                                           |
+| **uploads/**                | Stores uploaded drawing files during processing.                                                            |
+| **temp/**                   | Temporary working directory used while processing files.                                                    |
+
 
 <h2><b>Features</b></h2>
 Upload and compare two engineering drawings
