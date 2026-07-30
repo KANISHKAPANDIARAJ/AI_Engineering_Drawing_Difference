@@ -1,108 +1,327 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Engineering Drawing Difference Detection System</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DrawDiff Pro – Engineering Revision Analyzer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --sidebar-w: 220px;
+      --sidebar-bg: #0D1117;
+      --sidebar-border: rgba(255,255,255,0.07);
+      --sidebar-text: #8B949E;
+      --sidebar-hover: rgba(255,255,255,0.055);
+      --sidebar-active-bg: rgba(59,130,246,0.14);
+      --sidebar-active: #60A5FA;
+      --main-bg: #F0F2F7;
+      --card-bg: #FFFFFF;
+      --border: #E5E7EB;
+      --primary: #3B82F6;
+      --primary-dark: #2563EB;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --info: #6366F1;
+      --text-1: #111827;
+      --text-2: #374151;
+      --text-3: #6B7280;
+      --text-4: #9CA3AF;
+      --radius: 10px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size:15px;
+      background: var(--main-bg);
+      color: var(--text-1);
+      -webkit-font-smoothing: antialiased;
+    }
 
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    /* ── APP SHELL ── */
+    .app-shell { display: flex; height: 100vh; overflow: hidden; }
 
-    <!-- Custom Styling -->
-    <style>
-        body {
-            background-color: #f4f6f9;
-        }
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid var(--sidebar-border);
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
 
-        .navbar-brand {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
+    .sidebar-logo {
+      padding: 17px 14px;
+      border-bottom: 1px solid var(--sidebar-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #3B82F6, #6366F1);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size:19px; color: #fff; flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+    }
+    .logo-name { font-size:15.5px; font-weight: 700; color: #F0F6FF; line-height: 1.2; }
+    .logo-sub  { font-size:11.5px;   color: var(--sidebar-text);  line-height: 1.2; }
 
-        .content-wrapper {
-            min-height: 80vh;
-            padding: 30px 15px;
-        }
+    .sidebar-nav { padding: 10px 0; flex: 1; }
+    .nav-group-label {
+      font-size:11.5px; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; color: rgba(139,148,158,0.5);
+      padding: 14px 14px 5px;
+    }
+    .snav-item {
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 10px; margin: 1px 6px; border-radius: 7px;
+      font-size:14.5px; font-weight: 500; color: var(--sidebar-text);
+      cursor: pointer; transition: background .14s, color .14s;
+      text-decoration: none; white-space: nowrap;
+    }
+    .snav-item i { font-size:17px; width: 18px; text-align: center; flex-shrink: 0; }
+    .snav-item:hover { background: var(--sidebar-hover); color: #C9D1D9; text-decoration: none; }
+    .snav-item.active { background: var(--sidebar-active-bg); color: var(--sidebar-active); font-weight: 600; }
 
-        .footer {
-            background-color: #0d1b2a;
-            color: #ffffff;
-            padding: 15px 0;
-            text-align: center;
-            font-size: 14px;
-        }
+    .sidebar-promo {
+      margin: 8px 8px 6px;
+      background: linear-gradient(145deg, rgba(59,130,246,0.16), rgba(99,102,241,0.16));
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 10px; padding: 13px; flex-shrink: 0;
+    }
+    .sidebar-promo h6 { font-size:13.5px; font-weight: 700; color: #E0EDFF; margin-bottom: 4px; }
+    .sidebar-promo p  { font-size:12px; color: var(--sidebar-text); line-height: 1.45; margin-bottom: 10px; }
+    .btn-promo {
+      width: 100%; background: linear-gradient(135deg, #3B82F6, #6366F1);
+      border: none; color: #fff; font-size:13.5px; font-weight: 600;
+      padding: 8px; border-radius: 7px; cursor: pointer; transition: opacity .14s;
+    }
+    .btn-promo:hover { opacity: 0.87; }
 
-        .card {
-            border: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
+    .sidebar-user {
+      padding: 12px 14px;
+      border-top: 1px solid var(--sidebar-border);
+      display: flex; align-items: center; gap: 9px; flex-shrink: 0;
+    }
+    .user-ava {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: linear-gradient(135deg, #3B82F6, #6366F1);
+      display: flex; align-items: center; justify-content: center;
+      font-size:14px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .user-name { font-size:14px; font-weight: 600; color: #C9D1D9; }
+    .user-role { font-size:11.5px; color: var(--sidebar-text); }
+    .user-chevron { margin-left: auto; color: var(--sidebar-text); font-size:14px; }
 
-        .nav-link {
-            font-weight: 500;
-        }
-    </style>
+    /* ── MAIN ── */
+    .main-content { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; min-width: 0; }
+
+    /* ── SHARED COMPONENTS ── */
+    .dd-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary-dd {
+      background: var(--primary); color: #fff; border: none;
+      padding: 9px 18px; border-radius: 8px; font-size:15px; font-weight: 600;
+      cursor: pointer; transition: background .14s;
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+    .btn-primary-dd:hover { background: var(--primary-dark); }
+    .btn-primary-dd:disabled { opacity: 0.58; cursor: not-allowed; }
+    .btn-outline-dd {
+      background: transparent; color: var(--text-2);
+      border: 1px solid var(--border); padding: 7px 14px;
+      border-radius: 8px; font-size:14.5px; font-weight: 500;
+      cursor: pointer; transition: all .14s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-outline-dd:hover { border-color: #9CA3AF; color: var(--text-1); background: var(--main-bg); }
+
+    /* ── MODAL ── */
+    .modal-content   { border-radius: 14px; border: 1px solid var(--border); }
+    .modal-header    { border-bottom: 1px solid var(--border); padding: 18px 22px; }
+    .modal-body      { padding: 22px; }
+    .modal-footer    { border-top: 1px solid var(--border); padding: 14px 22px; }
+
+    /* ── DROP ZONE ── */
+    .drop-zone {
+      border: 2px dashed var(--border); border-radius: 10px;
+      padding: 28px 16px; text-align: center; cursor: pointer;
+      transition: all .18s; background: #FAFBFC;
+    }
+    .drop-zone:hover, .drop-zone.drag-over { border-color: var(--primary); background: rgba(59,130,246,0.04); }
+    .drop-zone i    { font-size:30px; color: var(--text-4); display: block; }
+    .dz-title       { font-size:14.5px; font-weight: 600; color: var(--text-2); margin: 8px 0 4px; }
+    .dz-sub         { font-size:12.5px; color: var(--text-3); }
+    .dz-filename    { font-size:14px; font-weight: 600; color: var(--primary); margin-top: 8px; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+
+    /* ── FOOTER BAR ── */
+    .footer-bar {
+      height: 36px; background: #fff; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; font-size:12.5px; color: var(--text-3); flex-shrink: 0;
+    }
+    .footer-secure { display: flex; align-items: center; gap: 5px; color: var(--success); font-weight: 500; }
+
+    /* ── HISTORY PANEL ── */
+    .history-empty { padding: 26px 14px; text-align: center; color: var(--text-4); font-size:13.5px; }
+    .history-item {
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 10px; margin: 0 6px 5px; border-radius: 7px;
+      cursor: pointer; transition: background .14s;
+    }
+    .history-item:hover { background: var(--sidebar-hover); }
+    .history-item .h-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .history-item .h-name { font-size:13.5px; font-weight: 600; color: #C9D1D9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .history-item .h-meta { font-size:11.5px; color: var(--sidebar-text); }
+    .history-item .h-del { margin-left: auto; color: var(--sidebar-text); font-size:14px; opacity: 0; transition: opacity .14s; }
+    .history-item:hover .h-del { opacity: 1; }
+    .history-item .h-del:hover { color: var(--danger); }
+  </style>
 </head>
-
 <body>
+<div class="app-shell">
 
-<!-- ================= NAVBAR ================= -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            AI Drawing Comparator
-        </a>
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-icon"><i class="bi bi-layers-half"></i></div>
+      <div>
+        <div class="logo-name">DrawDiff Pro</div>
+        <div class="logo-sub">Engineering Revision Analyzer</div>
+      </div>
+    </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">ANALYSIS</div>
+      <a class="snav-item active" href="/" id="navDashboard">
+        <i class="bi bi-grid-1x2-fill"></i> Dashboard
+      </a>
+      <a class="snav-item" href="#" id="navNewComparison">
+        <i class="bi bi-plus-circle"></i> New Comparison
+      </a>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+      <div class="nav-group-label" style="display:flex;align-items:center;justify-content:space-between;padding-right:12px;">
+        <span>HISTORY</span>
+        <i class="bi bi-trash3" id="btnClearHistory" title="Clear history" style="cursor:pointer;color:rgba(139,148,158,0.5);font-size:12.5px;"></i>
+      </div>
+      <div id="historyList"><div class="history-empty">No comparisons yet</div></div>
+    </nav>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#upload">Upload</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#results">Results</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#reports">Reports</a>
-                </li>
-
-            </ul>
-        </div>
+    <div class="sidebar-user">
+      <div class="user-ava">K</div>
+      <div>
+        <div class="user-name">Engineer</div>
+        <div class="user-role">Project Engineer</div>
+      </div>
     </div>
-</nav>
+  </aside>
 
-<!-- ================= MAIN CONTENT ================= -->
-<div class="container content-wrapper">
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main class="main-content">
+    {% block content %}{% endblock %}
 
-    {% block content %}
-    <!-- Page-specific content will be injected here -->
-    {% endblock %}
-
-</div>
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-    <div class="container">
-        <div>
-            Engineering Drawing Difference Detection System © 2026
-        </div>
-        <div class="small">
-            Built using OpenCV + Flask + AI-based Image Processing Pipeline
-        </div>
+    <!-- FOOTER -->
+    <div class="footer-bar">
+      <span>DrawDiff Pro v1.0.0</span>
+      <span class="footer-secure"><i class="bi bi-shield-check-fill"></i> Your data is secure and encrypted</span>
+      <span>© 2026 DrawDiff Pro. All rights reserved.</span>
     </div>
-</footer>
+  </main>
 
-<!-- Bootstrap JS -->
+</div><!-- /.app-shell -->
+
+<!-- Bootstrap JS — loaded BEFORE page scripts so bootstrap.Modal works -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- ═══ HISTORY (persists across pages via localStorage) ═══ -->
+<script>
+const HISTORY_KEY = "drawdiff_history";
+const SEV_COLOR = { HIGH: "#EF4444", MEDIUM: "#F59E0B", LOW: "#10B981" };
+
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }
+  catch (e) { return []; }
+}
+function saveHistory(list) {
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, 20)));
+}
+/* Called by the comparison page once results come back */
+function addHistoryEntry(entry) {
+  const list = getHistory();
+  list.unshift({ id: Date.now(), ts: new Date().toISOString(), ...entry });
+  saveHistory(list);
+  renderHistory();
+}
+function timeAgo(iso) {
+  const s = Math.floor((Date.now() - new Date(iso)) / 1000);
+  if (s < 60) return "just now";
+  if (s < 3600) return Math.floor(s / 60) + "m ago";
+  if (s < 86400) return Math.floor(s / 3600) + "h ago";
+  return Math.floor(s / 86400) + "d ago";
+}
+function renderHistory() {
+  const el = document.getElementById("historyList");
+  const list = getHistory();
+  if (!list.length) {
+    el.innerHTML = '<div class="history-empty">No comparisons yet</div>';
+    return;
+  }
+  el.innerHTML = list.map(h => {
+    const color = SEV_COLOR[(h.severity || "").toUpperCase()] || "#9CA3AF";
+    const label = h.name1 && h.name2 ? (h.name1 + " vs " + h.name2) : "Comparison";
+    return `<div class="history-item" onclick="reopenHistoryEntry(${h.id})" title="${label}">
+      <span class="h-dot" style="background:${color}"></span>
+      <div style="flex:1;min-width:0;">
+        <div class="h-name">${label}</div>
+        <div class="h-meta">${timeAgo(h.ts)} · ${h.similarity != null ? (h.similarity * 100).toFixed(0) + "% similar" : ""}</div>
+      </div>
+      <i class="bi bi-x-lg h-del" onclick="event.stopPropagation(); deleteHistoryEntry(${h.id})"></i>
+    </div>`;
+  }).join("");
+}
+function deleteHistoryEntry(id) {
+  saveHistory(getHistory().filter(h => h.id !== id));
+  renderHistory();
+}
+document.getElementById("btnClearHistory").addEventListener("click", () => {
+  if (confirm("Clear all comparison history?")) { saveHistory([]); renderHistory(); }
+});
+/* Reopening a past entry re-renders the dashboard from the data saved at run time,
+   as long as the underlying files are still on the server (basePath = /outputs/). */
+function reopenHistoryEntry(id) {
+  const entry = getHistory().find(h => h.id === id);
+  if (entry && entry.data && typeof window.renderDashboard === "function") {
+    window.lastData = entry.data;
+    document.getElementById("welcomeState") && (document.getElementById("welcomeState").style.display = "none");
+    window.startTime = Date.now() - 1;
+    window.renderDashboard(entry.data);
+  }
+}
+renderHistory();
+</script>
+
+{% block scripts %}{% endblock %}
 </body>
 </html>

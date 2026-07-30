@@ -1,355 +1,677 @@
 {% extends "layout.html" %}
-
 {% block content %}
 
-<div class="row justify-content-center">
-    <div class="col-lg-9">
-
-        <!-- ================= TITLE ================= -->
-        <div class="text-center mb-4">
-            <h2 class="fw-bold">Engineering Drawing Comparison System</h2>
-            <p class="text-muted">
-                Upload two drawings (PDF / Image) for AI-based difference detection.
-            </p>
-        </div>
-
-        <!-- ================= ALERTS ================= -->
-        <div id="alertBox"></div>
-
-        <!-- ================= UPLOAD ================= -->
-        <div class="card p-4">
-
-            <form id="uploadForm" enctype="multipart/form-data">
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Upload Drawing A</label>
-                    <input type="file" class="form-control" name="file1" id="file1"
-                        accept=".png,.jpg,.jpeg,.pdf" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Upload Drawing B</label>
-                    <input type="file" class="form-control" name="file2" id="file2"
-                        accept=".png,.jpg,.jpeg,.pdf" required>
-                </div>
-
-                <div id="validationMsg" class="text-danger small mb-2"></div>
-
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg" id="compareBtn">
-                        Compare Drawings
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-
-        <!-- ================= LOADING ================= -->
-        <div id="loading" class="text-center mt-4 d-none">
-            <div class="spinner-border text-primary"></div>
-            <p class="mt-2" id="loadingText">Processing drawings...</p>
-        </div>
-
-        <!-- ================= RESULTS ================= -->
-        <div id="resultsSection" class="mt-5 d-none">
-
-            <!-- SUMMARY -->
-            <div class="card p-4 mb-4">
-                <h4>Comparison Summary</h4>
-                <div id="summaryContent"></div>
-            </div>
-
-            <!-- AI REVISION INSIGHTS -->
-            <div id="aiInsightsCard" class="card p-4 mb-4 d-none">
-                <h4 class="text-primary fw-bold">AI Revision Analysis & Impact Report</h4>
-                <hr>
-                <div id="aiInsightsContent" class="markdown-body p-3 bg-light rounded" style="font-family: inherit; font-size: 0.95rem; line-height: 1.6;"></div>
-            </div>
-
-            <!-- DETAILED REGION ANALYSIS -->
-            <div id="regionsCard" class="card p-4 mb-4 d-none">
-                <h4>Detailed Revision Regions</h4>
-                <div id="regionsContent"></div>
-            </div>
-
-            <!-- STATISTICS -->
-            <div class="card p-4 mb-4">
-                <h4>Statistics</h4>
-                <div id="statsContent"></div>
-            </div>
-
-            <!-- VISUALIZATIONS -->
-            <div class="card p-4 mb-4">
-                <h4>Visualizations</h4>
-                <div id="visuals" class="row g-3"></div>
-            </div>
-
-            <!-- REPORTS -->
-            <div class="card p-4">
-                <h4>Reports</h4>
-
-                <a id="txtReport" class="btn btn-outline-dark me-2" download>
-                    Download TXT
-                </a>
-
-                <a id="jsonReport" class="btn btn-outline-primary me-2" download>
-                    Download JSON
-                </a>
-
-                <a id="mdReport" class="btn btn-outline-success d-none" download>
-                    Download AI Markdown Report
-                </a>
-            </div>
-
-        </div>
-
+<!-- ═══ TOPBAR ═══ -->
+<div style="height:58px;background:#fff;border-bottom:1px solid #E5E7EB;display:flex;align-items:center;padding:0 22px;gap:12px;flex-shrink:0;">
+  <div>
+    <div style="font-size:19px;font-weight:700;color:#111827;display:flex;align-items:center;gap:10px;">
+      Comparison Report
+      <span id="statusBadge" style="display:none;align-items:center;gap:5px;background:rgba(16,185,129,0.1);color:#059669;font-size:13.5px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid rgba(16,185,129,0.25);">
+        <i class="bi bi-check-circle-fill"></i> Completed
+      </span>
     </div>
+    <div id="breadcrumb" style="font-size:13.5px;color:#6B7280;margin-top:1px;">Dashboard → New Comparison</div>
+  </div>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:9px;">
+    <button class="btn-outline-dd" id="btnDownloadReport" style="display:none;" onclick="downloadPDF()">
+      <i class="bi bi-download"></i> Download Report
+    </button>
+    <button class="btn-primary-dd" id="btnNewComparison">
+      <i class="bi bi-plus"></i> New Comparison
+    </button>
+  </div>
 </div>
 
-<!-- Load marked.js for Markdown parsing -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- ═══ SCROLLABLE BODY ═══ -->
+<div style="flex:1;overflow-y:auto;padding:20px;" id="mainScroll">
 
-<script>
+  <!-- WELCOME STATE -->
+  <div id="welcomeState" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center;padding:40px;">
+    <div style="width:72px;height:72px;background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(99,102,241,0.1));border:1px solid rgba(59,130,246,0.2);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;color:#3B82F6;margin-bottom:20px;">
+      <i class="bi bi-layers-half"></i>
+    </div>
+    <h4 style="font-size:20px;font-weight:700;margin-bottom:8px;">Compare Engineering Drawings</h4>
+    <p style="color:#6B7280;max-width:380px;line-height:1.65;margin-bottom:24px;">
+      Upload two versions of an engineering drawing to automatically detect revisions,
+      classify changes, and generate a professional AI-powered analysis report.
+    </p>
+    <button class="btn-primary-dd" id="btnWelcomeUpload">
+      <i class="bi bi-upload"></i> Upload Drawings to Compare
+    </button>
+  </div>
 
-const form = document.getElementById("uploadForm");
-const file1 = document.getElementById("file1");
-const file2 = document.getElementById("file2");
+  <!-- DASHBOARD (hidden until results arrive) -->
+  <div id="dashboard" style="display:none;">
 
-const compareBtn = document.getElementById("compareBtn");
-const loading = document.getElementById("loading");
-const loadingText = document.getElementById("loadingText");
+    <!-- STAT CARDS -->
+    <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px;margin-bottom:16px;">
 
-const resultsSection = document.getElementById("resultsSection");
-
-const summaryContent = document.getElementById("summaryContent");
-const statsContent = document.getElementById("statsContent");
-const visuals = document.getElementById("visuals");
-
-const txtReport = document.getElementById("txtReport");
-const jsonReport = document.getElementById("jsonReport");
-const mdReport = document.getElementById("mdReport");
-
-const aiInsightsCard = document.getElementById("aiInsightsCard");
-const aiInsightsContent = document.getElementById("aiInsightsContent");
-const regionsCard = document.getElementById("regionsCard");
-const regionsContent = document.getElementById("regionsContent");
-
-const alertBox = document.getElementById("alertBox");
-
-// Single source of truth for the output URL prefix. The Flask route
-// "/outputs/<path:filename>" is the only thing this prefix has to match.
-// Every path coming back from /process is relative to OUTPUTS_DIR
-// (e.g. "highlighted/boxes.png", "reports/report.json") -- so basePath
-// is applied exactly once, here, for both images and reports.
-const basePath = "/outputs/";
-
-function showAlert(message, type) {
-    alertBox.innerHTML = `
-        <div class="alert alert-${type} alert-dismissible fade show">
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <div class="dd-card" style="padding:16px 14px;position:relative;overflow:hidden;">
+        <div style="font-size:12.5px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Overall Similarity</div>
+        <canvas id="gaugeCanvas" width="140" height="80" style="display:block;"></canvas>
+        <div id="statSimLabel" style="font-size:12.5px;color:#6B7280;margin-top:2px;">--</div>
+        <div style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(59,130,246,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#3B82F6;">
+          <i class="bi bi-circle-half"></i>
         </div>
-    `;
+      </div>
+
+      <div class="dd-card" style="padding:16px 14px;position:relative;">
+        <div style="font-size:12.5px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Total Revisions</div>
+        <div id="statRevisions" style="font-size:30px;font-weight:800;color:#111827;line-height:1;">--</div>
+        <div style="font-size:12.5px;color:#6B7280;margin-top:5px;">Changes Detected</div>
+        <div style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(59,130,246,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#3B82F6;">
+          <i class="bi bi-pencil-square"></i>
+        </div>
+      </div>
+
+      <div class="dd-card" style="padding:16px 14px;position:relative;">
+        <div style="font-size:12.5px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Severity Level</div>
+        <div id="statSeverity" style="font-size:24px;font-weight:800;line-height:1;">--</div>
+        <div id="statSeveritySub" style="font-size:12.5px;color:#6B7280;margin-top:5px;">--</div>
+        <div style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(245,158,11,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#F59E0B;">
+          <i class="bi bi-exclamation-triangle"></i>
+        </div>
+      </div>
+
+      <div class="dd-card" style="padding:16px 14px;position:relative;">
+        <div style="font-size:12.5px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Changed Area</div>
+        <div id="statChangedArea" style="font-size:30px;font-weight:800;color:#111827;line-height:1;">--</div>
+        <div style="font-size:12.5px;color:#6B7280;margin-top:5px;">Of Total Drawing Area</div>
+        <div style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(99,102,241,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#6366F1;">
+          <i class="bi bi-bounding-box"></i>
+        </div>
+      </div>
+
+      <div class="dd-card" style="padding:16px 14px;position:relative;">
+        <div style="font-size:12.5px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Processing Time</div>
+        <div id="statProcTime" style="font-size:30px;font-weight:800;color:#111827;line-height:1;">--</div>
+        <div style="font-size:12.5px;color:#6B7280;margin-top:5px;">AI Pipeline Duration</div>
+        <div style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(16,185,129,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#10B981;">
+          <i class="bi bi-clock"></i>
+        </div>
+      </div>
+
+    </div><!-- /stat cards -->
+
+    <!-- MIDDLE ROW: VIEWER + CHANGES PANEL -->
+    <div style="display:grid;grid-template-columns:1fr 290px;gap:13px;margin-bottom:14px;min-width:0;">
+
+      <!-- Drawing Viewer -->
+      <div class="dd-card" style="overflow:hidden;">
+        <div style="padding:11px 16px;border-bottom:1px solid #E5E7EB;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;gap:2px;background:#F0F2F7;border-radius:8px;padding:3px;">
+            <button class="vtab active" onclick="switchTab(this,'sidebyside')"><i class="bi bi-layout-split"></i> Side by Side</button>
+            <button class="vtab" onclick="switchTab(this,'overlay')"><i class="bi bi-layers"></i> Overlay</button>
+            <button class="vtab" onclick="switchTab(this,'boxes')"><i class="bi bi-grid-3x3"></i> Changes Only</button>
+            <button class="vtab" onclick="switchTab(this,'heatmap')"><i class="bi bi-thermometer-half"></i> Heatmap</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:7px;">
+            <span id="zoomLabel" style="font-size:13.5px;color:#6B7280;">100%</span>
+            <button class="btn-outline-dd" style="padding:5px 10px;font-size:14px;" onclick="zoomOut()"><i class="bi bi-dash"></i></button>
+            <button class="btn-outline-dd" style="padding:5px 10px;font-size:14px;" onclick="zoomIn()"><i class="bi bi-plus"></i></button>
+          </div>
+        </div>
+        <div id="viewerArea" style="padding:12px;background:#F7F8FA;min-height:280px;display:flex;gap:10px;align-items:flex-start;overflow:auto;position:relative;">
+          <div id="panelBefore" style="flex:1;position:relative;min-width:0;">
+            <span style="position:absolute;top:8px;left:8px;z-index:2;background:rgba(239,68,68,0.85);color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">BEFORE (Original)</span>
+            <img id="imgBefore" style="width:100%;display:block;border-radius:7px;box-shadow:0 2px 8px rgba(0,0,0,0.1);" src="" alt="Before">
+          </div>
+          <div id="panelAfter" style="flex:1;position:relative;min-width:0;">
+            <span style="position:absolute;top:8px;left:8px;z-index:2;background:rgba(16,185,129,0.85);color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">AFTER (Revised)</span>
+            <img id="imgAfter" style="width:100%;display:block;border-radius:7px;box-shadow:0 2px 8px rgba(0,0,0,0.1);" src="" alt="After">
+          </div>
+          <div id="panelSingle" style="flex:1;display:none;min-width:0;">
+            <img id="imgSingle" style="width:100%;display:block;border-radius:7px;" src="" alt="">
+          </div>
+        </div>
+        <div style="padding:9px 16px;border-top:1px solid #E5E7EB;display:flex;gap:16px;flex-wrap:wrap;">
+          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#10B981;margin-right:4px;"></span><span style="font-size:13.5px;color:#6B7280;">Added</span></span>
+          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#EF4444;margin-right:4px;"></span><span style="font-size:13.5px;color:#6B7280;">Removed</span></span>
+          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#F59E0B;margin-right:4px;"></span><span style="font-size:13.5px;color:#6B7280;">Modified</span></span>
+          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#6366F1;margin-right:4px;"></span><span style="font-size:13.5px;color:#6B7280;">Geometry Change</span></span>
+          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#3B82F6;margin-right:4px;"></span><span style="font-size:13.5px;color:#6B7280;">Annotation</span></span>
+        </div>
+      </div>
+
+      <!-- Detected Changes Panel -->
+      <div class="dd-card" style="display:flex;flex-direction:column;overflow:hidden;">
+        <div style="padding:13px 15px;border-bottom:1px solid #E5E7EB;display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:15px;font-weight:700;">Detected Changes</span>
+          <span id="changesCount" style="background:#3B82F6;color:#fff;font-size:12.5px;font-weight:600;border-radius:12px;padding:2px 9px;">0</span>
+        </div>
+        <div id="changesList" style="flex:1;overflow-y:auto;padding:9px;"></div>
+        <div style="padding:9px 12px;border-top:1px solid #E5E7EB;">
+          <a href="#changesSection" style="font-size:14px;font-weight:600;color:#3B82F6;text-decoration:none;display:flex;align-items:center;gap:4px;">
+            View All Changes <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /middle row -->
+
+    <!-- BOTTOM ROW -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;margin-bottom:14px;">
+
+      <!-- AI Summary -->
+      <div class="dd-card" style="padding:17px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:27px;height:27px;background:linear-gradient(135deg,#3B82F6,#6366F1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;">
+              <i class="bi bi-robot"></i>
+            </div>
+            <span style="font-size:15px;font-weight:700;">AI Summary</span>
+          </div>
+          <button class="btn-outline-dd" style="font-size:12.5px;padding:5px 10px;" onclick="regenerateSummary()">
+            <i class="bi bi-arrow-clockwise"></i> Regenerate
+          </button>
+        </div>
+        <div id="aiSummaryText" style="font-size:14.5px;color:#374151;line-height:1.65;max-height:110px;overflow-y:auto;margin-bottom:13px;">--</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;border-top:1px solid #E5E7EB;padding-top:11px;">
+          <div style="text-align:center;"><div style="font-size:11.5px;color:#6B7280;margin-bottom:3px;">Structural Impact</div><div id="impStructural" style="font-size:14px;font-weight:700;">--</div></div>
+          <div style="text-align:center;"><div style="font-size:11.5px;color:#6B7280;margin-bottom:3px;">Design Risk</div><div id="impDesign" style="font-size:14px;font-weight:700;">--</div></div>
+          <div style="text-align:center;"><div style="font-size:11.5px;color:#6B7280;margin-bottom:3px;">Recommendation</div><div id="impRec" style="font-size:14px;font-weight:700;">--</div></div>
+        </div>
+      </div>
+
+      <!-- Change Distribution -->
+      <div class="dd-card" style="padding:17px;">
+        <div style="font-size:15px;font-weight:700;margin-bottom:13px;">Change Distribution</div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:120px;height:120px;flex-shrink:0;"><canvas id="donutChart"></canvas></div>
+          <div id="donutLegend" style="flex:1;font-size:13.5px;"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid #E5E7EB;padding-top:11px;margin-top:11px;">
+          <div><div style="font-size:11.5px;color:#6B7280;">Total Changes</div><div id="totalChanges" style="font-size:20px;font-weight:800;">--</div></div>
+          <div><div style="font-size:11.5px;color:#6B7280;">Change Density</div><div id="changeDensity" style="font-size:20px;font-weight:800;">--</div></div>
+        </div>
+      </div>
+
+      <!-- Report Download -->
+      <div class="dd-card" style="padding:17px;">
+        <div style="font-size:15px;font-weight:700;margin-bottom:5px;">Report Download</div>
+        <div style="font-size:13.5px;color:#6B7280;margin-bottom:13px;">Generate a professional report with all changes, summaries and visualizations.</div>
+        <select id="reportFormatSelect" style="width:100%;border:1px solid #E5E7EB;border-radius:7px;padding:8px 10px;font-size:14px;color:#111827;background:#fff;margin-bottom:11px;">
+          <option value="pdf">PDF Report (Detailed)</option>
+          <option value="txt">Text Report</option>
+          <option value="json">JSON Report</option>
+          <option value="md">AI Markdown Report</option>
+        </select>
+        <button class="btn-primary-dd" style="width:100%;justify-content:center;" onclick="handleDownload()">
+          <i class="bi bi-file-earmark-pdf"></i> Download PDF
+        </button>
+        <div style="margin-top:13px;padding-top:13px;border-top:1px solid #E5E7EB;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:11.5px;color:#6B7280;">
+          <div><div id="metaPages" style="color:#111827;font-weight:600;">--</div>Pages</div>
+          <div><div style="color:#111827;font-weight:600;">A4</div>Format</div>
+          <div><div id="metaDate" style="color:#111827;font-weight:600;">--</div>Generated</div>
+        </div>
+      </div>
+
+    </div><!-- /bottom row -->
+
+    <!-- CHANGES TABLE -->
+    <div class="dd-card" style="padding:20px;margin-bottom:14px;" id="changesSection">
+      <div style="font-size:16px;font-weight:700;margin-bottom:15px;">Detailed Revision Regions</div>
+      <div id="regionsTableContent" style="overflow-x:auto;"></div>
+    </div>
+
+    <!-- AI FULL REPORT -->
+    <div class="dd-card" style="padding:20px;margin-bottom:14px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:15px;display:flex;align-items:center;gap:8px;">
+        <div style="width:26px;height:26px;background:linear-gradient(135deg,#3B82F6,#6366F1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;"><i class="bi bi-robot"></i></div>
+        AI Revision Analysis &amp; Impact Report
+      </div>
+      <div id="aiFullReport" style="font-size:15px;line-height:1.75;color:#374151;">--</div>
+    </div>
+
+  </div><!-- /#dashboard -->
+</div><!-- /#mainScroll -->
+
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(4px);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+  <div style="width:48px;height:48px;border:3px solid #E5E7EB;border-top-color:#3B82F6;border-radius:50%;animation:ddSpin .7s linear infinite;"></div>
+  <div style="font-size:16px;font-weight:600;color:#374151;">Processing drawings...</div>
+  <div style="font-size:14px;color:#6B7280;">AI analysis may take 10–30 seconds</div>
+</div>
+
+<!-- UPLOAD MODAL -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title" style="font-size:17px;font-weight:700;">New Comparison</h5>
+          <div style="font-size:14px;color:#6B7280;">Upload two engineering drawing files to compare</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <!-- Drawing A -->
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#374151;margin-bottom:8px;">
+              <i class="bi bi-file-earmark-image" style="color:#EF4444;"></i> Drawing A (Original)
+            </div>
+            <div class="drop-zone" id="dropA" onclick="document.getElementById('file1').click()">
+              <input type="file" id="file1" accept=".pdf,.png,.jpg,.jpeg" style="display:none;">
+              <i class="bi bi-cloud-upload"></i>
+              <div class="dz-title">Drop file here or click to browse</div>
+              <div class="dz-sub">PDF, PNG, JPG accepted</div>
+              <div class="dz-filename" id="labelA"></div>
+            </div>
+          </div>
+          <!-- Drawing B -->
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#374151;margin-bottom:8px;">
+              <i class="bi bi-file-earmark-image" style="color:#10B981;"></i> Drawing B (Revised)
+            </div>
+            <div class="drop-zone" id="dropB" onclick="document.getElementById('file2').click()">
+              <input type="file" id="file2" accept=".pdf,.png,.jpg,.jpeg" style="display:none;">
+              <i class="bi bi-cloud-upload"></i>
+              <div class="dz-title">Drop file here or click to browse</div>
+              <div class="dz-sub">PDF, PNG, JPG accepted</div>
+              <div class="dz-filename" id="labelB"></div>
+            </div>
+          </div>
+        </div>
+        <div id="uploadError" style="color:#EF4444;font-size:14px;margin-top:10px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-outline-dd" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn-primary-dd" onclick="startComparison()">
+          <i class="bi bi-play-fill"></i> Compare Drawings
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes ddSpin { to { transform: rotate(360deg); } }
+  .vtab {
+    display: flex; align-items: center; gap: 5px;
+    padding: 6px 12px; font-size:14px; font-weight: 500; color: #6B7280;
+    border-radius: 6px; cursor: pointer; border: none; background: transparent; transition: all .14s;
+  }
+  .vtab.active { background: #fff; color: #3B82F6; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .vtab:hover:not(.active) { color: #374151; }
+  .chg-item {
+    display: flex; gap: 9px; padding: 10px; border-radius: 8px;
+    border: 1px solid #E5E7EB; margin-bottom: 7px; cursor: pointer; transition: border-color .14s;
+  }
+  .chg-item:hover { border-color: #3B82F6; }
+  .chg-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size:12.5px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .imp-h { background: rgba(239,68,68,0.1);  color: #DC2626; font-size:11.5px; font-weight: 600; padding: 2px 7px; border-radius: 20px; display: inline-block; margin-top: 3px; }
+  .imp-m { background: rgba(245,158,11,0.1); color: #D97706; font-size:11.5px; font-weight: 600; padding: 2px 7px; border-radius: 20px; display: inline-block; margin-top: 3px; }
+  .imp-l { background: rgba(16,185,129,0.1); color: #059669; font-size:11.5px; font-weight: 600; padding: 2px 7px; border-radius: 20px; display: inline-block; margin-top: 3px; }
+  .rgtbl td { padding: 8px 10px; border-bottom: 1px solid #E5E7EB; vertical-align: middle; font-size:14.5px; }
+  .rgtbl th { padding: 8px 10px; font-size:12px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: .05em; border-bottom: 2px solid #E5E7EB; text-align: left; white-space: nowrap; }
+</style>
+
+{% endblock %}
+
+
+<!-- ═══ ALL JAVASCRIPT goes here — AFTER Bootstrap is loaded by layout.html ═══ -->
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+/* ── GLOBALS ── */
+const basePath = "/outputs/";
+let lastData = null, donutChart = null, startTime = null, zoomLevel = 100;
+
+const TC = {
+  "Added":           "#10B981",
+  "Removed":         "#EF4444",
+  "Modified":        "#F59E0B",
+  "Geometry Change": "#6366F1",
+  "Annotation":      "#3B82F6",
+  "Unknown":         "#9CA3AF"
+};
+
+/* ── MODAL (safe: Bootstrap is loaded before this script) ── */
+const uploadModal = new bootstrap.Modal(document.getElementById("uploadModal"));
+
+/* ── OPEN MODAL TRIGGERS ── */
+document.getElementById("btnNewComparison").addEventListener("click", () => uploadModal.show());
+document.getElementById("btnWelcomeUpload").addEventListener("click", () => uploadModal.show());
+document.getElementById("navNewComparison").addEventListener("click", (e) => { e.preventDefault(); uploadModal.show(); });
+
+/* ── FILE INPUT DISPLAY ── */
+document.getElementById("file1").addEventListener("change", function() { onFileSelect(this, "dropA", "labelA"); });
+document.getElementById("file2").addEventListener("change", function() { onFileSelect(this, "dropB", "labelB"); });
+
+function onFileSelect(input, dropId, labelId) {
+  const name = input.files[0]?.name || "";
+  if (name) {
+    document.getElementById(dropId).style.borderColor = "#3B82F6";
+    document.getElementById(labelId).textContent = name;
+  }
 }
 
-function validateFile(file) {
-    const allowed = ["pdf", "png", "jpg", "jpeg"];
-    const ext = file.name.split(".").pop().toLowerCase();
-    return allowed.includes(ext);
-}
-
-function resetUI() {
-    summaryContent.innerHTML = "";
-    statsContent.innerHTML = "";
-    visuals.innerHTML = "";
-    aiInsightsContent.innerHTML = "";
-    regionsContent.innerHTML = "";
-    aiInsightsCard.classList.add("d-none");
-    regionsCard.classList.add("d-none");
-    mdReport.classList.add("d-none");
-}
-
-function safe(val) {
-    return val ?? "N/A";
-}
-
-form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    alertBox.innerHTML = "";
-    document.getElementById("validationMsg").innerText = "";
-
-    resetUI();
-
-    if (!file1.files[0] || !file2.files[0]) {
-        showAlert("Please upload both drawings.", "danger");
-        return;
-    }
-
-    if (!validateFile(file1.files[0]) || !validateFile(file2.files[0])) {
-        showAlert("Only PDF, PNG, JPG, JPEG allowed.", "danger");
-        return;
-    }
-
-    compareBtn.disabled = true;
-    compareBtn.innerText = "Processing...";
-    loading.classList.remove("d-none");
-    resultsSection.classList.add("d-none");
-
-    const formData = new FormData();
-    formData.append("file1", file1.files[0]);
-    formData.append("file2", file2.files[0]);
-
-    try {
-        const response = await fetch("/process", {
-            method: "POST",
-            body: formData
-        });
-
-        if (!response.ok) {
-            const err = await response.json();
-            throw new Error(err.error || "Request failed");
-        }
-
-        const data = await response.json();
-
-        loading.classList.add("d-none");
-        compareBtn.disabled = false;
-        compareBtn.innerText = "Compare Drawings";
-
-        showAlert("Processing completed successfully!", "success");
-
-        resultsSection.classList.remove("d-none");
-
-        // ---------------- SUMMARY ----------------
-        const s = data.summary;
-
-        summaryContent.innerHTML = `
-            <p><strong>SSIM Score:</strong> ${safe(s.ssim_score)}</p>
-            <p><strong>Severity:</strong> ${safe(s.severity)}</p>
-            <p><strong>Changed Regions:</strong> ${safe(s.total_regions)}</p>
-            <p><strong>Percentage Change:</strong> ${safe(s.percentage_change)}%</p>
-            <p><strong>Conclusion:</strong> ${safe(s.conclusion)}</p>
-        `;
-
-        // ---------------- AI REVISION INSIGHTS ----------------
-        if (data.llm_report) {
-            aiInsightsCard.classList.remove("d-none");
-            aiInsightsContent.innerHTML = marked.parse(data.llm_report);
-        } else {
-            aiInsightsCard.classList.add("d-none");
-        }
-
-        // ---------------- DETAILED REGION ANALYSIS ----------------
-        if (data.regions && data.regions.length > 0) {
-            regionsCard.classList.remove("d-none");
-            let regionsHTML = `
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th style="width: 80px;">ID</th>
-                                <th>Grid Coordinate</th>
-                                <th>Change Type</th>
-                                <th>Description</th>
-                                <th>Original Text (Drawing A)</th>
-                                <th>Revised Text (Drawing B)</th>
-                                <th>Bounding Box</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-            `;
-
-            data.regions.forEach((r, idx) => {
-                const id = idx + 1;
-                const grid = r.grid || "N/A";
-                const changeType = r.change_type || "Unknown";
-                const description = r.description || "N/A";
-                
-                let badgeClass = "bg-secondary";
-                if (changeType === "Added") badgeClass = "bg-success";
-                else if (changeType === "Removed") badgeClass = "bg-danger";
-                else if (changeType === "Modified") badgeClass = "bg-warning text-dark";
-                else if (changeType === "Geometry Change") badgeClass = "bg-info";
-
-                const beforeText = r.before_text ? `<code>${r.before_text}</code>` : `<span class="text-muted italic">empty / no text</span>`;
-                const afterText = r.after_text ? `<code>${r.after_text}</code>` : `<span class="text-muted italic">empty / no text</span>`;
-                const boxStr = `x: ${r.x}, y: ${r.y}, w: ${r.w}, h: ${r.h}`;
-
-                regionsHTML += `
-                    <tr>
-                        <td><strong>${id}</strong></td>
-                        <td><span class="badge bg-dark">${grid}</span></td>
-                        <td><span class="badge ${badgeClass}">${changeType}</span></td>
-                        <td><strong>${description}</strong></td>
-                        <td>${beforeText}</td>
-                        <td>${afterText}</td>
-                        <td><small class="text-muted">${boxStr}</small></td>
-                    </tr>
-                `;
-            });
-
-            regionsHTML += `
-                        </tbody>
-                    </table>
-                </div>
-            `;
-            regionsContent.innerHTML = regionsHTML;
-        } else {
-            regionsCard.classList.add("d-none");
-        }
-
-        // ---------------- STATISTICS ----------------
-        const st = data.statistics;
-
-        statsContent.innerHTML = `
-            <p><strong>Changed Pixels:</strong> ${safe(st.changed_pixels)}</p>
-            <p><strong>Total Pixels:</strong> ${safe(st.total_pixels)}</p>
-            <p><strong>Difference Pixel Count:</strong> ${safe(st.diff_pixel_count)}</p>
-            <p><strong>Average Region Area:</strong> ${safe(st.average_region_area)}</p>
-        `;
-
-        // ---------------- VISUALS ----------------
-        // data.visualizations items look like "highlighted/boxes.png"
-        data.visualizations.forEach((file, index) => {
-
-            const labels = ["Boxes", "Heatmap", "Overlay", "Side-by-side"];
-            const label = labels[index] || "Result";
-
-            visuals.innerHTML += `
-                <div class="col-md-6 text-center">
-                    <p class="fw-semibold">${label}</p>
-                    <img src="${basePath + file}" class="img-fluid rounded shadow-sm">
-                </div>
-            `;
-        });
-
-        // ---------------- REPORTS ----------------
-        // data.reports.txt_report / json_report look like "reports/report.txt".
-        // Reuse the same basePath instead of hardcoding "/outputs/reports/" --
-        // that duplicate hardcoded prefix was the root cause of the
-        // "/outputs/reports/outputs/reports/..." 404s.
-        txtReport.href = basePath + data.reports.txt_report;
-        jsonReport.href = basePath + data.reports.json_report;
-
-        if (data.reports.md_report) {
-            mdReport.href = basePath + data.reports.md_report;
-            mdReport.classList.remove("d-none");
-        } else {
-            mdReport.classList.add("d-none");
-        }
-
-    } catch (err) {
-
-        loading.classList.add("d-none");
-        compareBtn.disabled = false;
-        compareBtn.innerText = "Compare Drawings";
-
-        showAlert(err.message, "danger");
-    }
+/* ── DRAG AND DROP ── */
+["dropA", "dropB"].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener("dragover",  e => { e.preventDefault(); el.classList.add("drag-over"); });
+  el.addEventListener("dragleave", () => el.classList.remove("drag-over"));
+  el.addEventListener("drop", e => {
+    e.preventDefault(); el.classList.remove("drag-over");
+    const inputId = id === "dropA" ? "file1" : "file2";
+    const labelId = id === "dropA" ? "labelA" : "labelB";
+    const dt = new DataTransfer();
+    dt.items.add(e.dataTransfer.files[0]);
+    const inp = document.getElementById(inputId);
+    inp.files = dt.files;
+    onFileSelect(inp, id, labelId);
+  });
 });
 
-</script>
+/* ── START COMPARISON ── */
+async function startComparison() {
+  const f1  = document.getElementById("file1");
+  const f2  = document.getElementById("file2");
+  const err = document.getElementById("uploadError");
+  err.textContent = "";
 
+  if (!f1.files[0] || !f2.files[0]) {
+    err.textContent = "Please upload both drawings."; return;
+  }
+  const allowed = ["pdf", "png", "jpg", "jpeg"];
+  const ext1 = f1.files[0].name.split(".").pop().toLowerCase();
+  const ext2 = f2.files[0].name.split(".").pop().toLowerCase();
+  if (!allowed.includes(ext1) || !allowed.includes(ext2)) {
+    err.textContent = "Only PDF, PNG, JPG, JPEG files are allowed."; return;
+  }
+
+  uploadModal.hide();
+  document.getElementById("loadingOverlay").style.display = "flex";
+  document.getElementById("welcomeState").style.display  = "none";
+  document.getElementById("dashboard").style.display     = "none";
+  startTime = Date.now();
+
+  const fd = new FormData();
+  fd.append("file1", f1.files[0]);
+  fd.append("file2", f2.files[0]);
+
+  try {
+    const res = await fetch("/process", { method: "POST", body: fd });
+    if (!res.ok) {
+      const e = await res.json();
+      throw new Error(e.error || "Processing failed");
+    }
+    const data = await res.json();
+    lastData = data;
+    renderDashboard(data);
+  } catch(e) {
+    document.getElementById("loadingOverlay").style.display = "none";
+    document.getElementById("welcomeState").style.display  = "flex";
+    alert("Error: " + e.message);
+  }
+}
+
+/* ── RENDER DASHBOARD ── */
+function renderDashboard(data) {
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+  document.getElementById("loadingOverlay").style.display = "none";
+  document.getElementById("dashboard").style.display      = "block";
+  document.getElementById("statusBadge").style.display    = "inline-flex";
+  document.getElementById("btnDownloadReport").style.display = "inline-flex";
+
+  const f1n = document.getElementById("file1").files[0]?.name || "Drawing A";
+  const f2n = document.getElementById("file2").files[0]?.name || "Drawing B";
+  document.getElementById("breadcrumb").innerHTML = "Dashboard → " + f1n + " vs " + f2n;
+
+  const s    = data.summary || {};
+  const ssim = parseFloat(s.ssim_score || 0);
+  renderGauge(ssim);
+  document.getElementById("statSimLabel").textContent =
+    ssim >= 0.95 ? "Very High Similarity" :
+    ssim >= 0.85 ? "High Similarity" :
+    ssim >= 0.70 ? "Moderate Similarity" : "Low Similarity";
+  document.getElementById("statRevisions").textContent   = s.total_regions   ?? "--";
+  document.getElementById("statChangedArea").textContent = (s.percentage_change ?? "--") + "%";
+  document.getElementById("statProcTime").textContent    = elapsed + " s";
+
+  const sev   = (s.severity || "UNKNOWN").toUpperCase();
+  const sevEl = document.getElementById("statSeverity");
+  sevEl.textContent  = sev.charAt(0) + sev.slice(1).toLowerCase();
+  sevEl.style.color  = sev === "HIGH" ? "#EF4444" : sev === "MEDIUM" ? "#F59E0B" : "#10B981";
+  document.getElementById("statSeveritySub").textContent =
+    sev === "HIGH"   ? "Engineering Validation Required" :
+    sev === "MEDIUM" ? "Review Recommended" : "Minor Changes Detected";
+
+
+  /* Images — backend saves these exact filenames:
+     before_annotated.png, after_annotated.png,
+     heatmap.png, overlay.png, side_by_side.png          */
+  const imgs = {};
+  (data.visualizations || []).forEach(f => {
+    const name = f.split("/").pop(); // strip folder prefix e.g. "highlighted/"
+    if      (name === "before_annotated.png") imgs.before     = basePath + f;
+    else if (name === "after_annotated.png")  imgs.after      = basePath + f;
+    else if (name === "heatmap.png")          imgs.heatmap    = basePath + f;
+    else if (name === "overlay.png")          imgs.overlay    = basePath + f;
+    else if (name === "side_by_side.png")     imgs.sidebyside = basePath + f;
+  });
+  // "Changes Only" tab shows the annotated after image
+  imgs.boxes = imgs.after || imgs.before || "";
+  if (!imgs.before) imgs.before = imgs.after  || "";
+  if (!imgs.after)  imgs.after  = imgs.before || "";
+  window._imgs = imgs;
+  const elBefore = document.getElementById("imgBefore");
+  const elAfter  = document.getElementById("imgAfter");
+  elBefore.style.display = "block";
+  elAfter.style.display  = "block";
+  elBefore.src = imgs.before;
+  elAfter.src  = imgs.after;
+
+  const regions = data.regions || [];
+  renderChangesList(regions);
+  renderChangesTable(regions);
+  renderDonutChart(regions);
+
+  if (data.llm_report) {
+    document.getElementById("aiSummaryText").textContent = extractSummary(data.llm_report);
+    document.getElementById("aiFullReport").innerHTML    = marked.parse(data.llm_report);
+  } else {
+    document.getElementById("aiSummaryText").textContent =
+      "AI report not available. Configure GEMINI_API_KEY in .env to enable.";
+  }
+
+  document.getElementById("totalChanges").textContent  = regions.length;
+  document.getElementById("changeDensity").textContent = (s.percentage_change ?? "--") + "%";
+  document.getElementById("metaPages").textContent     = Math.max(1, Math.ceil(regions.length / 3));
+  document.getElementById("metaDate").textContent      =
+    new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+
+  const ic = sev === "HIGH" ? "#EF4444" : sev === "MEDIUM" ? "#F59E0B" : "#10B981";
+  const il = sev === "HIGH" ? "High"    : sev === "MEDIUM" ? "Medium"  : "Low";
+  ["impStructural", "impDesign"].forEach(id => {
+    document.getElementById(id).textContent = il;
+    document.getElementById(id).style.color = ic;
+  });
+  document.getElementById("impRec").textContent = sev === "HIGH" ? "Review Required" : sev === "MEDIUM" ? "Review Recommended" : "Minor Review";
+  document.getElementById("impRec").style.color = ic;
+
+  window._reports = data.reports || {};
+  document.getElementById("mainScroll").scrollTo(0, 0);
+
+  /* Save this run into sidebar History (only for fresh runs, not re-opened ones) */
+  if (typeof addHistoryEntry === "function" && !window._reopeningHistory) {
+    addHistoryEntry({
+      name1: f1n,
+      name2: f2n,
+      similarity: ssim,
+      severity: sev,
+      data: data
+    });
+  }
+  window._reopeningHistory = false;
+}
+/* Expose so layout.html's history panel can re-render a past run */
+window.renderDashboard = renderDashboard;
+
+/* ── GAUGE ── */
+function renderGauge(ratio) {
+  const c   = document.getElementById("gaugeCanvas");
+  const ctx = c.getContext("2d");
+  const w = c.width, h = c.height;
+  ctx.clearRect(0, 0, w, h);
+  const cx = w / 2, cy = h - 2, r = Math.min(cx, cy) - 8;
+  ctx.beginPath(); ctx.arc(cx, cy, r, Math.PI, 0);
+  ctx.strokeStyle = "#E5E7EB"; ctx.lineWidth = 11; ctx.lineCap = "round"; ctx.stroke();
+  const g = ctx.createLinearGradient(0, 0, w, 0);
+  g.addColorStop(0,   "#EF4444");
+  g.addColorStop(0.5, "#F59E0B");
+  g.addColorStop(1,   "#10B981");
+  ctx.beginPath(); ctx.arc(cx, cy, r, Math.PI, Math.PI + (ratio * Math.PI));
+  ctx.strokeStyle = g; ctx.lineWidth = 11; ctx.lineCap = "round"; ctx.stroke();
+  ctx.fillStyle = "#111827"; ctx.font = "bold 15px Inter,sans-serif";
+  ctx.textAlign = "center"; ctx.fillText((ratio * 100).toFixed(1) + "%", cx, cy - 10);
+}
+
+/* ── VIEWER TABS ── */
+function switchTab(btn, tab) {
+  document.querySelectorAll(".vtab").forEach(t => t.classList.remove("active"));
+  btn.classList.add("active");
+  const imgs   = window._imgs || {};
+  const before = document.getElementById("panelBefore");
+  const after  = document.getElementById("panelAfter");
+  const single = document.getElementById("panelSingle");
+  if (tab === "sidebyside") {
+    before.style.display = "block"; after.style.display = "block"; single.style.display = "none";
+    document.getElementById("imgBefore").src = imgs.before || "";
+    document.getElementById("imgAfter").src  = imgs.after  || "";
+  } else if (tab === "boxes") {
+    before.style.display = "none"; after.style.display = "none"; single.style.display = "block";
+    document.getElementById("imgSingle").src = imgs.boxes || imgs.after || "";
+  } else {
+    before.style.display = "none"; after.style.display = "none"; single.style.display = "block";
+    document.getElementById("imgSingle").src = imgs[tab] || "";
+  }
+}
+
+/* ── ZOOM ── */
+function zoomIn()  { zoomLevel = Math.min(zoomLevel + 25, 200); applyZoom(); }
+function zoomOut() { zoomLevel = Math.max(zoomLevel - 25, 50);  applyZoom(); }
+function applyZoom() {
+  document.getElementById("zoomLabel").textContent = zoomLevel + "%";
+  document.querySelectorAll("#viewerArea img").forEach(i => i.style.width = zoomLevel + "%");
+}
+
+/* ── CHANGES LIST ── */
+function getImpact(r) {
+  const a = (r.w || 0) * (r.h || 0);
+  return a > 10000 ? ["High Impact","imp-h"] : a > 2000 ? ["Medium Impact","imp-m"] : ["Low Impact","imp-l"];
+}
+function renderChangesList(regions) {
+  const list = document.getElementById("changesList");
+  document.getElementById("changesCount").textContent = regions.length;
+  if (!regions.length) {
+    list.innerHTML = '<div style="text-align:center;padding:20px;color:#6B7280;font-size:14px;">No changes detected</div>';
+    return;
+  }
+  list.innerHTML = regions.slice(0, 8).map((r, i) => {
+    const type  = r.change_type || "Unknown";
+    const color = TC[type] || "#9CA3AF";
+    const [il, ic] = getImpact(r);
+    const desc  = r.description || ("Change at Grid " + (r.grid || "N/A"));
+    return `<div class="chg-item">
+      <div class="chg-num" style="background:${color}">${i + 1}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14.5px;font-weight:600;color:#111827;">${type}</div>
+        <div style="font-size:13.5px;color:#6B7280;margin:2px 0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${desc}</div>
+        <span class="${ic}">${il}</span>
+      </div>
+      <span style="font-size:11.5px;color:#9CA3AF;align-self:flex-start;margin-top:2px;">${r.grid || ""}</span>
+    </div>`;
+  }).join("");
+}
+
+/* ── CHANGES TABLE ── */
+function renderChangesTable(regions) {
+  const c = document.getElementById("regionsTableContent");
+  if (!regions.length) {
+    c.innerHTML = '<div style="color:#6B7280;font-size:14px;padding:10px 0;">No region data available.</div>';
+    return;
+  }
+  const rows = regions.map((r, i) => {
+    const type  = r.change_type || "Unknown";
+    const color = TC[type] || "#9CA3AF";
+    const desc  = r.description || "N/A";
+    const before = r.before_text
+      ? `<code style="font-size:12.5px;background:#F3F4F6;padding:2px 5px;border-radius:4px;">${r.before_text}</code>`
+      : '<span style="color:#9CA3AF;font-style:italic;">empty</span>';
+    const after = r.after_text
+      ? `<code style="font-size:12.5px;background:#F3F4F6;padding:2px 5px;border-radius:4px;">${r.after_text}</code>`
+      : '<span style="color:#9CA3AF;font-style:italic;">empty</span>';
+    return `<tr>
+      <td style="font-weight:700;">${i + 1}</td>
+      <td><span style="background:#1F2937;color:#fff;font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:20px;">${r.grid || "N/A"}</span></td>
+      <td><span style="background:${color}22;color:${color};font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid ${color}44;">${type}</span></td>
+      <td style="max-width:160px;">${desc}</td>
+      <td>${before}</td>
+      <td>${after}</td>
+      <td style="font-size:12.5px;color:#6B7280;">x:${r.x} y:${r.y}</td>
+    </tr>`;
+  }).join("");
+  c.innerHTML = `<table class="rgtbl" style="width:100%;border-collapse:collapse;">
+    <thead><tr><th>ID</th><th>Grid</th><th>Type</th><th>Description</th><th>Original</th><th>Revised</th><th>Loc</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+/* ── DONUT CHART ── */
+function renderDonutChart(regions) {
+  const counts = {};
+  regions.forEach(r => { const t = r.change_type || "Unknown"; counts[t] = (counts[t] || 0) + 1; });
+  const labels = Object.keys(counts);
+  const values = Object.values(counts);
+  const colors = labels.map(l => TC[l] || "#9CA3AF");
+  const total  = values.reduce((a, b) => a + b, 0) || 1;
+  if (donutChart) donutChart.destroy();
+  donutChart = new Chart(document.getElementById("donutChart").getContext("2d"), {
+    type: "doughnut",
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 0, hoverOffset: 4 }] },
+    options: { cutout: "70%", plugins: { legend: { display: false } }, animation: { duration: 600 } }
+  });
+  document.getElementById("donutLegend").innerHTML = labels.map((l, i) =>
+    `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span style="width:9px;height:9px;border-radius:50%;background:${colors[i]};display:inline-block;"></span>
+        <span style="color:#374151;">${l}</span>
+      </div>
+      <span style="font-weight:600;color:#111827;">${values[i]} (${((values[i]/total)*100).toFixed(0)}%)</span>
+    </div>`
+  ).join("");
+}
+
+/* ── HELPERS ── */
+function extractSummary(md) {
+  const p = md.split("\n\n").filter(x => x.trim() && !x.startsWith("#"));
+  return (p[0] || "").replace(/[*_`#]/g, "").trim() || md.substring(0, 300);
+}
+function regenerateSummary() {
+  const el = document.getElementById("aiSummaryText");
+  el.style.opacity = "0.4";
+  setTimeout(() => el.style.opacity = "1", 700);
+}
+
+/* ── DOWNLOAD ── */
+function handleDownload() {
+  const fmt = document.getElementById("reportFormatSelect").value;
+  const rep = window._reports || {};
+  if (fmt === "pdf") { window.open("/report", "_blank"); return; }
+  const links = { txt: rep.txt_report, json: rep.json_report, md: rep.md_report };
+  const href  = links[fmt];
+  if (href) {
+    const a = document.createElement("a");
+    a.href = basePath + href;
+    a.download = href.split("/").pop();
+    a.click();
+  } else {
+    alert("Run a comparison first.");
+  }
+}
+function downloadPDF() { window.open("/report", "_blank"); }
+</script>
 {% endblock %}

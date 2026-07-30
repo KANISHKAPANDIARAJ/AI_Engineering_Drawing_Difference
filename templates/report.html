@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DrawDiff Pro – Engineering Revision Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;font-size:12px;color:#111827;background:#f5f6f8;}
+    .page{max-width:960px;margin:24px auto;background:#fff;border-radius:12px;padding:44px 40px;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
+    /* HEADER */
+    .hdr{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;border-bottom:2px solid #E5E7EB;margin-bottom:26px;}
+    .logo-row{display:flex;align-items:center;gap:10px;}
+    .logo-box{width:38px;height:38px;background:linear-gradient(135deg,#3B82F6,#6366F1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;font-weight:700;}
+    .logo-name{font-size:16px;font-weight:800;color:#111827;}
+    .logo-sub{font-size:10px;color:#6B7280;}
+    .report-meta{text-align:right;font-size:11px;color:#6B7280;line-height:1.7;}
+    .report-meta strong{color:#111827;font-size:14px;display:block;margin-bottom:2px;font-weight:700;}
+    .status-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(16,185,129,0.1);color:#059669;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid rgba(16,185,129,0.25);}
+    /* STAT ROW */
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:26px;}
+    .stat-box{border:1px solid #E5E7EB;border-radius:10px;padding:14px 13px;}
+    .stat-label{font-size:10px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;}
+    .stat-val{font-size:24px;font-weight:800;color:#111827;line-height:1;}
+    .stat-sub{font-size:10px;color:#6B7280;margin-top:4px;}
+    .sev-high{color:#EF4444;} .sev-medium{color:#F59E0B;} .sev-low{color:#10B981;}
+    /* SECTIONS */
+    .sec-title{font-size:13.5px;font-weight:700;margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid #E5E7EB;display:flex;align-items:center;gap:7px;}
+    .sec-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0;}
+    .drawing-img{width:100%;border-radius:9px;border:1px solid #E5E7EB;margin-bottom:26px;}
+    /* TABLE */
+    table{width:100%;border-collapse:collapse;font-size:11.5px;margin-bottom:26px;}
+    th{padding:7px 9px;font-size:10px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid #E5E7EB;text-align:left;white-space:nowrap;}
+    td{padding:7px 9px;border-bottom:1px solid #F3F4F6;vertical-align:middle;}
+    .badge-type{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;}
+    .badge-grid{background:#1F2937;color:#fff;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;}
+    code{font-size:10.5px;background:#F3F4F6;padding:2px 5px;border-radius:4px;font-family:monospace;}
+    /* AI SECTION */
+    .ai-section{background:#F8FAFF;border:1px solid #DBEAFE;border-radius:10px;padding:16px;margin-bottom:26px;}
+    .ai-header{font-size:12px;font-weight:700;color:#1E40AF;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+    .ai-text{font-size:11.5px;line-height:1.75;color:#374151;white-space:pre-wrap;}
+    /* FOOTER */
+    .page-footer{border-top:1px solid #E5E7EB;padding-top:14px;display:flex;justify-content:space-between;font-size:10px;color:#9CA3AF;}
+    /* PRINT BUTTON (hidden on print) */
+    .print-btn{position:fixed;top:20px;right:20px;background:#3B82F6;color:#fff;border:none;padding:10px 20px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(59,130,246,0.35);transition:background .14s;display:flex;align-items:center;gap:7px;z-index:999;}
+    .print-btn:hover{background:#2563EB;}
+    @media print{
+      .print-btn{display:none!important;}
+      body{background:#fff;}
+      .page{box-shadow:none;border-radius:0;margin:0;padding:30px 28px;}
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">
+  &#128438; Print / Save as PDF
+</button>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="logo-row">
+      <div class="logo-box">&#9638;</div>
+      <div>
+        <div class="logo-name">DrawDiff Pro</div>
+        <div class="logo-sub">Engineering Revision Analyzer</div>
+      </div>
+    </div>
+    <div class="report-meta">
+      <strong>Engineering Revision Report</strong>
+      <span class="status-badge">&#10003; Completed</span><br>
+      Report ID: {{ report_id }}<br>
+      Generated: {{ generated_date }}
+    </div>
+  </div>
+
+  <!-- STAT ROW -->
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-label">Overall Similarity</div>
+      <div class="stat-val">{{ similarity_pct }}%</div>
+      <div class="stat-sub">SSIM Score: {{ ssim_score }}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">Total Revisions</div>
+      <div class="stat-val">{{ total_regions }}</div>
+      <div class="stat-sub">Changes Detected</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">Severity Level</div>
+      <div class="stat-val {{ severity_class }}">{{ severity }}</div>
+      <div class="stat-sub">{{ severity_sub }}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">Changed Area</div>
+      <div class="stat-val">{{ percentage_change }}%</div>
+      <div class="stat-sub">Of Total Drawing Area</div>
+    </div>
+  </div>
+
+  <!-- ANNOTATED DIFF IMAGE -->
+  {% if boxes_image %}
+  <div class="sec-title">
+    <div class="sec-icon" style="background:#3B82F6;">&#9728;</div>
+    Annotated Difference Map
+  </div>
+  <img class="drawing-img" src="{{ boxes_image }}" alt="Annotated Difference Visualization">
+  {% endif %}
+
+  <!-- DETECTED REGIONS TABLE -->
+  {% if regions %}
+  <div class="sec-title">
+    <div class="sec-icon" style="background:#6366F1;">&#9881;</div>
+    Detected Change Regions ({{ regions|length }} total)
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:36px;">ID</th>
+        <th>Grid</th>
+        <th>Change Type</th>
+        <th>Description</th>
+        <th>Original Text</th>
+        <th>Revised Text</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for r in regions %}
+      <tr>
+        <td><strong>{{ loop.index }}</strong></td>
+        <td><span class="badge-grid">{{ r.grid or 'N/A' }}</span></td>
+        <td><span class="badge-type" style="background:{{ r.color }}22;color:{{ r.color }};border:1px solid {{ r.color }}44;">{{ r.change_type or 'Unknown' }}</span></td>
+        <td style="max-width:200px;">{{ r.description or 'N/A' }}</td>
+        <td><code>{{ r.before_text or 'empty' }}</code></td>
+        <td><code>{{ r.after_text or 'empty' }}</code></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <!-- AI REPORT -->
+  {% if llm_report %}
+  <div class="ai-section">
+    <div class="ai-header">&#129302; AI Revision Analysis &amp; Impact Report</div>
+    <div class="ai-text">{{ llm_report }}</div>
+  </div>
+  {% endif %}
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span>DrawDiff Pro v1.0.0 &bull; AI-Powered Engineering Revision Analyzer</span>
+    <span>Generated: {{ generated_date }} &bull; &copy; 2026 DrawDiff Pro. All rights reserved.</span>
+  </div>
+
+</div>
+</body>
+</html>
